@@ -27,11 +27,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   background-size:48px 48px;}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:60px;
+nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
   display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;
   background:rgba(6,6,15,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-logo-icon{width:32px;height:32px;flex-shrink:0;}
+.nav-logo-icon{width:128px;height:128px;flex-shrink:0;object-fit:contain;}
 .nav-logo-text{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;
   background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px;}
 .nav-right{display:flex;gap:8px;align-items:center;}
@@ -44,9 +44,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:60px;
 .btn-owner:hover{background:rgba(236,72,153,0.1)!important;border-color:#ec489960!important;}
 
 /* ── LAYOUT ── */
-.layout{display:flex;padding-top:60px;min-height:100vh;position:relative;z-index:1;}
+.layout{display:flex;padding-top:140px;min-height:100vh;position:relative;z-index:1;}
 .sidebar{width:210px;min-width:210px;padding:1.25rem 0;border-right:1px solid var(--border);
-  position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;}
+  position:sticky;top:140px;height:calc(100vh - 140px);overflow-y:auto;}
 .sidebar-label{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--text3);
   text-transform:uppercase;padding:0 1rem;margin-bottom:.4rem;margin-top:1rem;}
 .sidebar-label:first-child{margin-top:0;}
@@ -566,11 +566,19 @@ function render(){
       if(p.kits&&p.kits[currentMode]) kitsToShow=[currentMode];
     }
 
+    const TIER_ORDER=["HT1","LT1","HT2","LT2","HT3","LT3","HT4","LT4","HT5","LT5"];
+    kitsToShow.sort((a,b)=>{
+      const ta=TIER_ORDER.indexOf(p.kits[a]);
+      const tb=TIER_ORDER.indexOf(p.kits[b]);
+      return ta-tb;
+    });
     const kitBadges = kitsToShow.map(k=>{
       const tier = p.kits[k];
       const retired = p.retired&&p.retired[k];
       const tc = "tier-"+tier.toLowerCase();
-      return `<div class="kit-badge ${tc}${retired?" is-retired":""}">
+      const pts = POINTS[tier]||0;
+      const tooltip = `${tier}: ${pts} point${pts!==1?"s":""}`;
+      return `<div class="kit-badge ${tc}${retired?" is-retired":""}" title="${tooltip}">
         <div class="kit-badge-icon">${KSVG[k]||""}</div>
         <div class="kit-badge-tier">${tier}${retired?" <span style='color:#38bdf8;font-size:8px'>R</span>":""}</div>
       </div>`;
@@ -663,7 +671,7 @@ async function addTier(){
   showMsg("⏳ Saving...","ok");
   await dbUpsert(players[key]);
   render();refreshDropdowns();showMsg(`✅ ${mcName} → ${kit} ${tier}`,"ok");
-  document.getElementById("f-name").value="";
+  // name bleibt stehen damit man mehrere Kits hintereinander geben kann
 }
 async function removeTier(){
   const name=document.getElementById("r-player").value,kit=document.getElementById("r-kit").value;
