@@ -10,401 +10,410 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#0d0f14;--bg2:#131720;--bg3:#1a1f2e;
-  --surface:#161b26;--surface2:#1e2436;
-  --border:#ffffff0a;--border2:#ffffff14;
-  --p1:#7c3aed;--p2:#a855f7;--p3:#ec4899;
-  --grad:linear-gradient(135deg,#7c3aed,#ec4899);
-  --grad2:linear-gradient(90deg,#7c3aed,#a855f7,#ec4899);
-  --text:#e8eaf0;--text2:#8892a4;--text3:#4a5568;
-  /* Tier colors as requested */
-  --ht1:#d4a017;   /* gold */
-  --lt1:#b8860b;   /* darker gold */
-  --ht2:#d8d8d8;   /* light gray almost white */
-  --lt2:#a0a0a0;   /* slightly darker gray */
-  --ht3:#e8704a;   /* light red-orange */
-  --lt3:#b84a28;   /* darker red-orange */
-  --ht4:#b0b8c4;   /* light gray different hue */
-  --lt4:#6a7480;   /* dark gray */
-  --ht5:#c8cdd4;   /* light gray */
-  --lt5:#505860;   /* dark gray */
+  --bg:#0c0d12;
+  --bg2:#13141c;
+  --bg3:#191b24;
+  --surface:#14151e;
+  --surface2:#1c1e2a;
+  --border:#ffffff0c;
+  --border2:#ffffff14;
+  --text:#e8eaf0;
+  --text2:#8891a4;
+  --text3:#3d4558;
+
+  /* Tier colors */
+  --ht1:#E8BA3A;
+  --lt1:#D5B355;
+  --ht2:#C4D3E7;
+  --lt2:#A0A7B2;
+  --ht3:#F89F5A;
+  --lt3:#C67B42;
+  --ht4:#81749A;
+  --lt4:#655B79;
+  --ht5:#8F82A8;
+  --lt5:#655B79;
+  --retired:#A2D6FF;
 }
+
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
-.bg-mesh{position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse 700px 500px at 15% 15%,#7c3aed07 0%,transparent 60%),
-    radial-gradient(ellipse 600px 400px at 85% 85%,#ec489907 0%,transparent 60%);}
-.bg-grid{position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);
-  background-size:40px 40px;}
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:10000;height:58px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 20px;
+  background:#0c0d12;border-bottom:1px solid var(--border2);
+}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-logo-icon{width:38px;height:38px;object-fit:contain;border-radius:6px;}
+.nav-logo-text{font-family:'Rajdhani',sans-serif;font-size:1.25rem;font-weight:700;color:#fff;letter-spacing:.5px;}
+.nav-right{display:flex;gap:6px;align-items:center;}
+.nav-btn{display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:7px;
+  font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;border:1px solid;
+  background:transparent;font-family:'DM Sans',sans-serif;text-decoration:none;}
+.nav-btn-discord{border-color:#5865f230;color:#7289da;}
+.nav-btn-discord:hover{background:rgba(88,101,242,.1);}
+.nav-btn-owner{border-color:#e040a030;color:#e040a0;}
+.nav-btn-owner:hover{background:rgba(224,64,160,.08);}
+.nav-btn-owner.logged-in{border-color:#34d39930!important;color:#34d399!important;}
 
-/* ── TOP NAV ── */
-.top-nav{
-  position:fixed;top:0;left:0;right:0;z-index:10000;
-  background:rgba(13,15,20,0.96);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border2);
+/* ═══════════════════════════════════════
+   TABS BAR  — exactly like reference
+═══════════════════════════════════════ */
+.tabs-bar{
+  position:fixed;top:58px;left:0;right:0;z-index:9998;
+  background:#13141c;border-bottom:1px solid var(--border2);
+  display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;
+  height:62px;
 }
-.top-nav-inner{
-  max-width:1200px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 1.5rem;height:70px;
-}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-logo-img{width:52px;height:52px;object-fit:contain;flex-shrink:0;}
-.nav-logo-text{font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;
-  background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px;}
-.nav-actions{display:flex;gap:8px;align-items:center;}
-.nav-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;
-  font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s;
-  border:1px solid transparent;background:transparent;text-decoration:none;white-space:nowrap;}
-.nav-btn:hover{color:var(--text);border-color:var(--border2);background:var(--surface2);}
-.nav-btn svg{width:14px;height:14px;flex-shrink:0;}
-.btn-owner{border-color:#ec489930!important;color:#ec4899!important;}
-.btn-owner:hover{background:rgba(236,72,153,0.08)!important;border-color:#ec489960!important;}
-.btn-owner.logged-in{border-color:#34d39930!important;color:#34d399!important;}
+.tabs-bar::-webkit-scrollbar{display:none;}
 
-/* ── MODE TABS (like MCTiers top bar) ── */
-.mode-tabs-bar{
-  background:rgba(13,15,20,0.98);border-bottom:1px solid var(--border2);
-  position:fixed;top:70px;left:0;right:0;z-index:9999;
-  overflow-x:auto;scrollbar-width:none;
-}
-.mode-tabs-bar::-webkit-scrollbar{display:none;}
-.mode-tabs-inner{
-  max-width:1200px;margin:0 auto;
-  display:flex;align-items:stretch;padding:0 1rem;
-  gap:2px;
-}
-.mode-tab{
+.tab{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:4px;padding:10px 18px;
-  cursor:pointer;transition:all .18s;
-  color:var(--text3);font-size:11px;font-weight:700;letter-spacing:.3px;
-  border-bottom:2px solid transparent;white-space:nowrap;
-  min-width:72px;
+  gap:4px;padding:0 22px;cursor:pointer;border:none;border-bottom:none;
+  background:transparent;color:var(--text3);font-size:11.5px;font-weight:600;
+  font-family:'DM Sans',sans-serif;white-space:nowrap;letter-spacing:.2px;
+  transition:color .15s;position:relative;min-width:80px;
+  border-right:1px solid var(--border);
 }
-.mode-tab:hover{color:var(--text2);background:rgba(255,255,255,.03);}
-.mode-tab.active{color:var(--text);border-bottom-color:#7c3aed;}
-.mode-tab img{width:24px;height:24px;object-fit:contain;opacity:.55;transition:opacity .18s;}
-.mode-tab.active img{opacity:1;}
-.mode-tab svg{width:22px;height:22px;opacity:.55;transition:opacity .18s;}
-.mode-tab.active svg{opacity:1;}
-.mode-tab-label{font-size:11px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;}
-
-/* ── LAYOUT ── */
-.layout{padding-top:128px;min-height:100vh;position:relative;z-index:1;}
-.content{max-width:1200px;margin:0 auto;padding:1.5rem 1.5rem 4rem;}
-
-/* ── COL HEADERS ── */
-.col-headers{
-  display:grid;grid-template-columns:80px 1fr 80px 1fr;
-  padding:8px 16px;margin-bottom:4px;
-  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);
-  border-bottom:1px solid var(--border);
+.tab:first-child{border-left:1px solid var(--border);}
+.tab:hover{color:var(--text2);}
+.tab.active{color:#fff;background:#1c1e2a;}
+.tab.active::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:#fff;
 }
-.ch-player{padding-left:64px;}
-.ch-region{text-align:center;}
-.ch-tiers{text-align:right;padding-right:8px;}
+.tab-icon{width:24px;height:24px;object-fit:contain;opacity:.4;transition:opacity .15s;}
+.tab.active .tab-icon{opacity:1;}
+.tab-trophy{width:22px;height:22px;opacity:.4;}
+.tab.active .tab-trophy{opacity:1;filter:drop-shadow(0 0 4px #f59e0b88);}
 
-/* ── SEARCH ── */
-.search-wrap{position:relative;margin-bottom:1rem;}
-.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);
+/* ═══════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════ */
+.layout{padding-top:120px;min-height:100vh;}
+.main{padding:0 20px 60px;}
+
+/* ═══════════════════════════════════════
+   TOP BAR (info + search)
+═══════════════════════════════════════ */
+.top-bar{
+  display:flex;align-items:center;justify-content:flex-end;
+  gap:10px;padding:14px 0 10px;
+}
+.info-btn{
+  display:flex;align-items:center;gap:6px;padding:6px 14px;
+  border-radius:7px;font-size:12px;font-weight:600;color:var(--text2);
+  border:1px solid var(--border2);background:var(--surface2);cursor:pointer;
+}
+.info-btn svg{width:14px;height:14px;}
+
+.search-wrap{flex:1;max-width:340px;position:relative;}
+.search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);
   width:14px;height:14px;color:var(--text3);pointer-events:none;}
-#search{width:100%;padding:10px 12px 10px 36px;background:var(--surface);border:1px solid var(--border2);
-  border-radius:9px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:border .2s;}
-#search:focus{border-color:#7c3aed55;}
+#search{
+  width:100%;padding:8px 11px 8px 34px;background:var(--surface2);
+  border:1px solid var(--border2);border-radius:8px;color:var(--text);
+  font-size:13px;font-family:'DM Sans',sans-serif;outline:none;
+}
+#search:focus{border-color:#ffffff25;}
 #search::placeholder{color:var(--text3);}
 
-/* ── PLAYER ROW ── */
+/* ═══════════════════════════════════════
+   TABLE HEADER
+═══════════════════════════════════════ */
+.list-header{
+  display:flex;align-items:center;
+  padding:0 0 6px 0;
+  font-size:10.5px;font-weight:700;letter-spacing:1.1px;
+  text-transform:uppercase;color:var(--text3);
+  border-bottom:1px solid var(--border2);margin-bottom:4px;
+}
+.lh-num{width:60px;min-width:60px;text-align:center;flex-shrink:0;}
+.lh-avatar{width:52px;min-width:52px;flex-shrink:0;}
+.lh-player{flex:1;padding-left:12px;}
+.lh-region{width:90px;text-align:center;flex-shrink:0;}
+.lh-tiers{width:300px;text-align:right;padding-right:14px;flex-shrink:0;}
+
+/* ═══════════════════════════════════════
+   PLAYER ROW  — main layout
+═══════════════════════════════════════ */
 .player-row{
-  display:grid;
-  grid-template-columns:80px 1fr 80px 1fr;
-  align-items:center;
-  border-radius:10px;margin-bottom:4px;
-  transition:all .15s;cursor:pointer;position:relative;overflow:hidden;
-  border:1px solid var(--border);background:var(--surface);
-  min-height:72px;
+  display:flex;align-items:center;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin-bottom:5px;
+  min-height:74px;
+  overflow:hidden;
+  position:relative;
+  transition:border-color .15s, background .15s;
 }
 .player-row:hover{border-color:var(--border2);background:var(--surface2);}
-.player-row.banned{opacity:.35;}
+.player-row.banned{opacity:.32;}
 
-/* rank+avatar column */
-.col-rank-avatar{
-  display:flex;align-items:center;gap:0;
-  height:100%;position:relative;z-index:1;
-}
-
-/* diagonal color stripe for top 3 */
-.player-row.top1{border-color:rgba(212,160,23,.3);}
-.player-row.top1 .col-rank-avatar::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:100%;
-  background:linear-gradient(90deg,#8a6800 0%,#6b5000 50%,transparent 100%);
-  clip-path:polygon(0 0,75% 0,100% 100%,0 100%);
-  z-index:0;
-}
-.player-row.top2{border-color:rgba(180,180,200,.2);}
-.player-row.top2 .col-rank-avatar::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:100%;
-  background:linear-gradient(90deg,#4a5060 0%,#3a3e4a 50%,transparent 100%);
-  clip-path:polygon(0 0,75% 0,100% 100%,0 100%);z-index:0;
-}
-.player-row.top3{border-color:rgba(160,90,30,.25);}
-.player-row.top3 .col-rank-avatar::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:100%;
-  background:linear-gradient(90deg,#6b3800 0%,#522c00 50%,transparent 100%);
-  clip-path:polygon(0 0,75% 0,100% 100%,0 100%);z-index:0;
+/* Rank column — slanted colored bg for top3 */
+.row-num{
+  width:60px;min-width:60px;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;
+  color:var(--text3);flex-shrink:0;position:relative;z-index:1;
+  align-self:stretch;
 }
 
-.rank-num{
-  width:36px;text-align:center;flex-shrink:0;
-  font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:800;color:var(--text3);
-  position:relative;z-index:1;
+/* Gold / Silver / Bronze slanted left panel — clip-path polygon */
+.player-row.top1 .row-num{
+  color:#fde68a;
+  background:linear-gradient(160deg,#b8860b 0%,#9a6f00 55%,transparent 100%);
+  clip-path:polygon(0 0,78% 0,100% 100%,0 100%);
+  min-width:66px;width:66px;
 }
-.player-row.top1 .rank-num{color:#fde68a;}
-.player-row.top2 .rank-num{color:#dde3ec;}
-.player-row.top3 .rank-num{color:#f6c89a;}
+.player-row.top2 .row-num{
+  color:#e2e8f0;
+  background:linear-gradient(160deg,#6b7280 0%,#4b5563 55%,transparent 100%);
+  clip-path:polygon(0 0,78% 0,100% 100%,0 100%);
+  min-width:66px;width:66px;
+}
+.player-row.top3 .row-num{
+  color:#fed7aa;
+  background:linear-gradient(160deg,#92400e 0%,#7c3313 55%,transparent 100%);
+  clip-path:polygon(0 0,78% 0,100% 100%,0 100%);
+  min-width:66px;width:66px;
+}
 
+/* Avatar */
 .row-avatar{
   width:50px;height:50px;border-radius:8px;overflow:hidden;
-  flex-shrink:0;position:relative;z-index:1;
-  filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));
+  flex-shrink:0;background:var(--bg3);margin-left:8px;
 }
 .row-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
 
-/* player info column */
-.col-player-info{padding:0 12px;display:flex;flex-direction:column;gap:3px;}
-.row-name{font-weight:700;font-size:15px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.row-sub{font-size:11px;color:var(--text2);display:flex;align-items:center;gap:5px;}
-.row-sub svg{width:11px;height:11px;color:var(--p2);}
-.banned-tag{font-size:9px;font-weight:800;background:#ff444422;border:1px solid #ff444455;
-  color:#ff6666;padding:1px 5px;border-radius:3px;margin-left:4px;}
-
-/* region column */
-.col-region{display:flex;align-items:center;justify-content:center;}
-.region-badge{
-  padding:5px 10px;border-radius:7px;
-  font-size:11px;font-weight:800;color:#fff;letter-spacing:.5px;
-  text-align:center;
+/* Player info */
+.row-info{flex:1;padding:0 12px;min-width:0;}
+.row-name{
+  font-weight:700;font-size:15px;color:var(--text);
+  display:flex;align-items:center;gap:7px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.region-EU{background:#1a4a2e;}
-.region-NA{background:#4a1a1a;}
-.region-AS{background:#1a2a4a;}
-
-/* kits column — right aligned */
-.col-kits{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;padding-right:12px;}
-
-/* ── KIT BADGE — round icon + tier label below ── */
-.kit-badge{
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  cursor:default;
+.banned-tag{font-size:9px;font-weight:800;background:#ff444418;
+  border:1px solid #ff444440;color:#ff6666;padding:1px 6px;border-radius:4px;}
+.row-sub{
+  font-size:12px;color:var(--text3);margin-top:2px;
+  display:flex;align-items:center;gap:5px;
 }
-.kit-icon-circle{
-  width:38px;height:38px;border-radius:50%;
-  background:#1a1f2e;border:1.5px solid rgba(255,255,255,.12);
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .15s;flex-shrink:0;
+.row-sub-icon{width:13px;height:13px;flex-shrink:0;opacity:.6;}
+
+/* Region */
+.row-region-cell{width:90px;min-width:90px;flex-shrink:0;display:flex;justify-content:center;}
+.row-region{
+  font-size:12px;font-weight:800;letter-spacing:.6px;
+  padding:4px 10px;border-radius:6px;
+}
+.reg-na{background:rgba(239,68,68,.18);color:#f87171;border:1px solid rgba(239,68,68,.3);}
+.reg-eu{background:rgba(59,130,246,.18);color:#60a5fa;border:1px solid rgba(59,130,246,.3);}
+.reg-as{background:rgba(16,185,129,.18);color:#34d399;border:1px solid rgba(16,185,129,.3);}
+.reg-other{background:var(--bg3);color:var(--text3);border:1px solid var(--border2);}
+
+/* Tiers column */
+.row-tiers{
+  width:300px;min-width:300px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:flex-end;
+  flex-wrap:nowrap;gap:5px;padding:0 14px 0 6px;
   overflow:hidden;
 }
-.kit-icon-circle img{width:22px;height:22px;object-fit:contain;}
-.kit-badge:hover .kit-icon-circle{transform:translateY(-2px);}
-.kit-tier-label{
-  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:900;
-  letter-spacing:.3px;line-height:1;text-align:center;
-  padding:2px 5px;border-radius:4px;
-  min-width:28px;
+
+/* ═══════════════════════════════════════
+   KIT BADGE  — circle icon top, rect label bottom
+   (exactly as reference image)
+═══════════════════════════════════════ */
+.kit-badge{
+  display:flex;flex-direction:column;align-items:center;
+  gap:2px;flex-shrink:0;cursor:default;
 }
-.kit-badge.is-retired{opacity:.45;}
-.kit-badge.is-retired .kit-tier-label::after{content:' R';font-size:7px;}
+.kit-circle{
+  width:34px;height:34px;border-radius:50%;
+  border:2px solid;
+  background:rgba(0,0,0,.45);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .12s;
+}
+.kit-badge:hover .kit-circle{transform:translateY(-1px);}
+.kit-circle img{width:17px;height:17px;object-fit:contain;}
+.kit-label{
+  font-family:'Rajdhani',sans-serif;font-size:10.5px;font-weight:800;
+  letter-spacing:.15px;line-height:1;text-align:center;
+}
+.kit-badge.is-retired .kit-circle{opacity:.42;}
+.kit-badge.is-retired .kit-label{opacity:.42;}
 
-/* Tier colors — icon border + label color */
-/* HT1: Gold */
-.t-ht1 .kit-icon-circle{border-color:rgba(212,160,23,.7);background:rgba(212,160,23,.12);}
-.t-ht1 .kit-tier-label{color:var(--ht1);background:rgba(212,160,23,.15);}
-/* LT1: Darker gold */
-.t-lt1 .kit-icon-circle{border-color:rgba(184,134,11,.7);background:rgba(184,134,11,.12);}
-.t-lt1 .kit-tier-label{color:var(--lt1);background:rgba(184,134,11,.15);}
-/* HT2: Light gray almost white */
-.t-ht2 .kit-icon-circle{border-color:rgba(216,216,216,.5);background:rgba(216,216,216,.08);}
-.t-ht2 .kit-tier-label{color:var(--ht2);background:rgba(216,216,216,.1);}
-/* LT2: Slightly darker gray */
-.t-lt2 .kit-icon-circle{border-color:rgba(160,160,160,.45);background:rgba(160,160,160,.07);}
-.t-lt2 .kit-tier-label{color:var(--lt2);background:rgba(160,160,160,.1);}
-/* HT3: Light red-orange */
-.t-ht3 .kit-icon-circle{border-color:rgba(232,112,74,.6);background:rgba(232,112,74,.1);}
-.t-ht3 .kit-tier-label{color:var(--ht3);background:rgba(232,112,74,.15);}
-/* LT3: Darker red-orange */
-.t-lt3 .kit-icon-circle{border-color:rgba(184,74,40,.6);background:rgba(184,74,40,.1);}
-.t-lt3 .kit-tier-label{color:var(--lt3);background:rgba(184,74,40,.15);}
-/* HT4: Light gray different hue (bluish) */
-.t-ht4 .kit-icon-circle{border-color:rgba(176,184,196,.4);background:rgba(176,184,196,.07);}
-.t-ht4 .kit-tier-label{color:var(--ht4);background:rgba(176,184,196,.1);}
-/* LT4: Dark gray */
-.t-lt4 .kit-icon-circle{border-color:rgba(106,116,128,.4);background:rgba(106,116,128,.07);}
-.t-lt4 .kit-tier-label{color:var(--lt4);background:rgba(106,116,128,.1);}
-/* HT5: Light gray */
-.t-ht5 .kit-icon-circle{border-color:rgba(200,205,212,.35);background:rgba(200,205,212,.06);}
-.t-ht5 .kit-tier-label{color:var(--ht5);background:rgba(200,205,212,.08);}
-/* LT5: Dark gray */
-.t-lt5 .kit-icon-circle{border-color:rgba(80,88,96,.4);background:rgba(80,88,96,.07);}
-.t-lt5 .kit-tier-label{color:var(--lt5);background:rgba(80,88,96,.1);}
+/* Tier-specific ring+text colors */
+.tc-ht1 .kit-circle{border-color:#E8BA3A;box-shadow:0 0 7px #E8BA3A44;}
+.tc-ht1 .kit-label{color:#E8BA3A;}
+.tc-lt1 .kit-circle{border-color:#D5B355;box-shadow:0 0 5px #D5B35530;}
+.tc-lt1 .kit-label{color:#D5B355;}
+.tc-ht2 .kit-circle{border-color:#C4D3E7;box-shadow:0 0 5px #C4D3E730;}
+.tc-ht2 .kit-label{color:#C4D3E7;}
+.tc-lt2 .kit-circle{border-color:#A0A7B2;box-shadow:0 0 4px #A0A7B220;}
+.tc-lt2 .kit-label{color:#A0A7B2;}
+.tc-ht3 .kit-circle{border-color:#F89F5A;box-shadow:0 0 7px #F89F5A44;}
+.tc-ht3 .kit-label{color:#F89F5A;}
+.tc-lt3 .kit-circle{border-color:#C67B42;box-shadow:0 0 5px #C67B4230;}
+.tc-lt3 .kit-label{color:#C67B42;}
+.tc-ht4 .kit-circle{border-color:#81749A;box-shadow:0 0 5px #81749A30;}
+.tc-ht4 .kit-label{color:#81749A;}
+.tc-lt4 .kit-circle{border-color:#655B79;box-shadow:0 0 4px #655B7920;}
+.tc-lt4 .kit-label{color:#655B79;}
+.tc-ht5 .kit-circle{border-color:#8F82A8;box-shadow:0 0 4px #8F82A820;}
+.tc-ht5 .kit-label{color:#8F82A8;}
+.tc-lt5 .kit-circle{border-color:#655B79;}
+.tc-lt5 .kit-label{color:#655B79;}
+.tc-retired .kit-circle{border-color:#A2D6FF;box-shadow:0 0 4px #A2D6FF30;}
+.tc-retired .kit-label{color:#A2D6FF;}
 
-/* ── EMPTY STATE ── */
 .empty-state{text-align:center;padding:5rem 2rem;color:var(--text3);}
-.empty-state svg{width:44px;height:44px;margin:0 auto 1rem;opacity:.2;display:block;}
 .empty-state h3{font-size:17px;color:var(--text2);margin-bottom:.4rem;}
 
-/* ── MODALS ── */
-.modal-backdrop{position:fixed;inset:0;background:rgba(6,8,14,.9);z-index:999990;
+/* ═══════════════════════════════════════
+   MODALS
+═══════════════════════════════════════ */
+.modal-backdrop{position:fixed;inset:0;background:rgba(6,6,14,.9);z-index:999990;
   backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;}
 .modal-backdrop.open{display:flex;}
 .modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;
-  width:520px;max-width:96vw;max-height:90vh;overflow-y:auto;padding:1.75rem;position:relative;}
-.modal-title{font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;
-  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.2rem;}
-.modal-sub{color:var(--text3);font-size:12px;margin-bottom:1.25rem;}
+  width:510px;max-width:96vw;max-height:90vh;overflow-y:auto;padding:1.75rem;position:relative;}
+.modal-title{font-family:'Rajdhani',sans-serif;font-size:1.45rem;font-weight:700;
+  color:var(--text);margin-bottom:.2rem;}
+.modal-sub{color:var(--text3);font-size:12px;margin-bottom:1.2rem;}
 .modal-close{position:absolute;top:.9rem;right:.9rem;background:var(--surface);
   border:1px solid var(--border2);color:var(--text2);border-radius:7px;padding:3px 9px;
-  cursor:pointer;font-size:12px;transition:all .2s;}
+  cursor:pointer;font-size:12px;}
 .modal-close:hover{color:var(--text);}
 .modal hr{border:none;border-top:1px solid var(--border2);margin:1rem 0;}
 .modal h3{font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;
-  color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.6rem;}
-.form-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:.6rem;}
+  color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.55rem;}
+.form-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:.55rem;}
 .form-row input,.form-row select,.modal input[type=email],.modal input[type=password]{
-  flex:1;min-width:90px;background:var(--surface);border:1px solid var(--border2);
-  color:var(--text);padding:9px 11px;border-radius:8px;font-size:13px;
-  font-family:'DM Sans',sans-serif;outline:none;transition:border .2s;}
-.form-row input:focus,.form-row select:focus{border-color:#7c3aed55;}
+  flex:1;min-width:88px;background:var(--surface2);border:1px solid var(--border2);
+  color:var(--text);padding:8px 10px;border-radius:8px;font-size:13px;
+  font-family:'DM Sans',sans-serif;outline:none;}
 .form-row select option{background:var(--bg2);}
-.btn{padding:9px 18px;border:none;border-radius:8px;font-weight:700;font-size:13px;
-  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s;}
-.btn-grad{background:var(--grad);color:#fff;box-shadow:0 4px 14px rgba(124,58,237,.25);}
-.btn-grad:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(124,58,237,.35);}
+.btn{padding:8px 17px;border:none;border-radius:8px;font-weight:700;font-size:13px;
+  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.btn-grad{background:linear-gradient(135deg,#5865f2,#7c3aed);color:#fff;}
+.btn-grad:hover{transform:translateY(-1px);}
 .btn-red{background:linear-gradient(135deg,#ff4444,#cc2222);color:#fff;}
 .btn-red:hover{transform:translateY(-1px);}
 .btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text2);}
 .btn-outline:hover{color:var(--text);background:var(--surface2);}
 .btn-full{width:100%;}
-.msg{padding:9px 13px;border-radius:8px;font-size:12px;margin-bottom:.6rem;display:none;}
+.msg{padding:8px 12px;border-radius:7px;font-size:12px;margin-bottom:.55rem;display:none;}
 .msg.ok{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);color:#34d399;display:block;}
 .msg.err{background:rgba(255,68,68,.1);border:1px solid rgba(255,68,68,.3);color:#ff6666;display:block;}
-.login-box{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;
-  width:360px;max-width:96vw;padding:1.75rem;text-align:center;}
-.login-box h2{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;
-  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.2rem;}
-.login-box p{color:var(--text3);font-size:12px;margin-bottom:1.1rem;}
-.login-box input{width:100%;background:var(--surface);border:1px solid var(--border2);
-  color:var(--text);padding:10px 12px;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;
-  outline:none;margin-bottom:.7rem;display:block;}
-.login-err{color:#ff6666;font-size:11px;margin-top:.4rem;min-height:14px;}
+.login-box{background:var(--bg2);border:1px solid var(--border2);border-radius:15px;
+  width:340px;max-width:96vw;padding:1.6rem;text-align:center;}
+.login-box h2{font-family:'Rajdhani',sans-serif;font-size:1.35rem;font-weight:700;
+  color:var(--text);margin-bottom:.2rem;}
+.login-box p{color:var(--text3);font-size:12px;margin-bottom:1rem;}
+.login-box input{width:100%;background:var(--surface2);border:1px solid var(--border2);
+  color:var(--text);padding:9px 11px;border-radius:8px;font-size:13px;
+  font-family:'DM Sans',sans-serif;outline:none;margin-bottom:.65rem;display:block;}
+.login-err{color:#ff6666;font-size:11px;margin-top:.35rem;min-height:14px;}
 
-@media(max-width:768px){
-  .col-headers{grid-template-columns:72px 1fr 60px 1fr;}
-  .player-row{grid-template-columns:72px 1fr 60px 1fr;}
-  .kit-icon-circle{width:32px;height:32px;}
-  .kit-icon-circle img{width:18px;height:18px;}
-  .col-kits{gap:4px;}
-}
-@media(max-width:520px){
-  .col-headers{grid-template-columns:64px 1fr 0 auto;}
-  .player-row{grid-template-columns:64px 1fr 0 auto;}
-  .col-region{display:none;}
-  .ch-region{display:none;}
-  .content{padding:1rem .75rem 4rem;}
+@media(max-width:760px){
+  .lh-region,.row-region-cell{display:none;}
+  .row-tiers{width:200px;min-width:160px;}
+  .lh-tiers{width:200px;}
+  .kit-circle{width:28px;height:28px;}
+  .kit-circle img{width:14px;height:14px;}
+  .kit-label{font-size:9.5px;}
+  .tab{padding:0 14px;min-width:64px;}
 }
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:#ffffff10;border-radius:99px;}
+::-webkit-scrollbar-thumb{background:#ffffff0e;border-radius:99px;}
 </style>
 </head>
 <body>
-<div class="bg-mesh"></div>
-<div class="bg-grid"></div>
 
-<!-- TOP NAV -->
-<div class="top-nav">
-  <div class="top-nav-inner">
-    <div class="nav-logo">
-      <img class="nav-logo-img" src="logo.png" alt="LegitTiers" onerror="this.style.display='none'">
-      <span class="nav-logo-text">LegitTiers</span>
-    </div>
-    <div class="nav-actions">
-      <a class="nav-btn" href="https://discord.gg/Q7BYQDTg76" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-        Discord
-      </a>
-      <div class="nav-btn btn-owner" id="ownerBtn" onclick="openOwnerLogin()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        <span id="ownerBtnLabel">Owner</span>
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <img class="nav-logo-icon" src="logo.png" alt="" onerror="this.style.display='none'">
+    <span class="nav-logo-text">LegitTiers</span>
+  </div>
+  <div class="nav-right">
+    <a class="nav-btn nav-btn-discord" href="https://discord.gg/Q7BYQDTg76" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      Discord
+    </a>
+    <button class="nav-btn nav-btn-owner" id="ownerBtn" onclick="openOwnerLogin()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span id="ownerBtnLabel">Owner</span>
+    </button>
+  </div>
+</nav>
+
+<!-- TABS -->
+<div class="tabs-bar">
+  <button class="tab active" onclick="switchMode('Overall',this)">
+    <svg class="tab-trophy" viewBox="0 0 24 24" fill="#f59e0b"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+    Overall
+  </button>
+  <button class="tab" onclick="switchMode('Sword',this)">
+    <img class="tab-icon" src="icons/sword.png" onerror="this.style.opacity='.15'">
+    Sword
+  </button>
+  <button class="tab" onclick="switchMode('Axe',this)">
+    <img class="tab-icon" src="icons/axe.png" onerror="this.style.opacity='.15'">
+    Axe
+  </button>
+  <button class="tab" onclick="switchMode('Mace',this)">
+    <img class="tab-icon" src="icons/mace.png" onerror="this.style.opacity='.15'">
+    Mace
+  </button>
+  <button class="tab" onclick="switchMode('Crystal',this)">
+    <img class="tab-icon" src="icons/crystal.png" onerror="this.style.opacity='.15'">
+    Crystal
+  </button>
+  <button class="tab" onclick="switchMode('UHC',this)">
+    <img class="tab-icon" src="icons/uhc.png" onerror="this.style.opacity='.15'">
+    UHC
+  </button>
+  <button class="tab" onclick="switchMode('Pot',this)">
+    <img class="tab-icon" src="icons/pot.png" onerror="this.style.opacity='.15'">
+    Pot
+  </button>
+  <button class="tab" onclick="switchMode('NetheriteOP',this)">
+    <img class="tab-icon" src="icons/netheriteopt.png" onerror="this.style.opacity='.15'">
+    NethOP
+  </button>
+  <button class="tab" onclick="switchMode('SMP',this)">
+    <img class="tab-icon" src="icons/smp.png" onerror="this.style.opacity='.15'">
+    SMP
+  </button>
+</div>
+
+<!-- MAIN -->
+<div class="layout">
+  <main class="main">
+    <div class="top-bar">
+      <div class="info-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        Information
       </div>
     </div>
-  </div>
-</div>
 
-<!-- MODE TABS -->
-<div class="mode-tabs-bar">
-  <div class="mode-tabs-inner" id="modeTabs">
-    <div class="mode-tab active" data-mode="Overall" onclick="switchMode('Overall',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-      <span class="mode-tab-label">Overall</span>
-    </div>
-    <div class="mode-tab" data-mode="Sword" onclick="switchMode('Sword',this)">
-      <img src="icons/sword.png" alt="Sword">
-      <span class="mode-tab-label">Sword</span>
-    </div>
-    <div class="mode-tab" data-mode="Axe" onclick="switchMode('Axe',this)">
-      <img src="icons/axe.png" alt="Axe">
-      <span class="mode-tab-label">Axe</span>
-    </div>
-    <div class="mode-tab" data-mode="Mace" onclick="switchMode('Mace',this)">
-      <img src="icons/mace.png" alt="Mace">
-      <span class="mode-tab-label">Mace</span>
-    </div>
-    <div class="mode-tab" data-mode="Crystal" onclick="switchMode('Crystal',this)">
-      <img src="icons/crystal.png" alt="Crystal">
-      <span class="mode-tab-label">Crystal</span>
-    </div>
-    <div class="mode-tab" data-mode="UHC" onclick="switchMode('UHC',this)">
-      <img src="icons/uhc.png" alt="UHC">
-      <span class="mode-tab-label">UHC</span>
-    </div>
-    <div class="mode-tab" data-mode="Pot" onclick="switchMode('Pot',this)">
-      <img src="icons/pot.png" alt="Pot">
-      <span class="mode-tab-label">Pot</span>
-    </div>
-    <div class="mode-tab" data-mode="SMP" onclick="switchMode('SMP',this)">
-      <img src="icons/smp.png" alt="SMP">
-      <span class="mode-tab-label">SMP</span>
-    </div>
-    <div class="mode-tab" data-mode="NetheriteOP" onclick="switchMode('NetheriteOP',this)">
-      <img src="icons/netheriteopt.png" alt="NethOP">
-      <span class="mode-tab-label">NethOP</span>
-    </div>
-  </div>
-</div>
-
-<!-- MAIN CONTENT -->
-<div class="layout">
-  <div class="content">
-
-    <!-- Search -->
-    <div class="search-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="search" placeholder="Search player..." oninput="render()">
+    <div class="list-header">
+      <div class="lh-num">#</div>
+      <div class="lh-avatar"></div>
+      <div class="lh-player">PLAYER</div>
+      <div class="lh-region">REGION</div>
+      <div class="lh-tiers">TIERS</div>
     </div>
 
-    <!-- Column headers -->
-    <div class="col-headers">
-      <div>#</div>
-      <div class="ch-player">Player</div>
-      <div class="ch-region">Region</div>
-      <div class="ch-tiers">Tiers</div>
-    </div>
-
-    <!-- Player list -->
     <div id="list"></div>
-
-  </div>
+  </main>
 </div>
 
 <!-- LOGIN MODAL -->
@@ -412,11 +421,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   <div class="login-box" onclick="event.stopPropagation()">
     <h2>🔐 Owner Login</h2>
     <p>Login with your owner account</p>
-    <input type="email" id="loginEmail" placeholder="E-Mail" onkeydown="if(event.key==='Enter')document.getElementById('loginPw').focus()">
+    <input type="email" id="loginEmail" placeholder="E-Mail" onkeydown="if(event.key==='Enter')doLogin()">
     <input type="password" id="loginPw" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="btn btn-grad btn-full" onclick="doLogin()">Login</button>
     <div class="login-err" id="loginErr"></div>
-    <div style="margin-top:.6rem"><button class="btn btn-outline" onclick="document.getElementById('loginBackdrop').classList.remove('open')">Cancel</button></div>
+    <div style="margin-top:.55rem"><button class="btn btn-outline" onclick="document.getElementById('loginBackdrop').classList.remove('open')">Cancel</button></div>
   </div>
 </div>
 
@@ -471,66 +480,69 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <hr>
     <h3>⚠ Danger Zone</h3>
     <button class="btn btn-red" onclick="resetAll()">Reset ALL Data</button>
-    <div style="margin-top:.75rem"><button class="btn btn-outline" onclick="doLogout()">🚪 Logout</button></div>
+    <div style="margin-top:.7rem"><button class="btn btn-outline" onclick="doLogout()">🚪 Logout</button></div>
   </div>
 </div>
 
 <script type="module">
-import { initializeApp }       from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey:"AIzaSyDrlGkH0_qb5-aqgAr5SURzBXs7JCSvw58",
-  authDomain:"legitiers.firebaseapp.com",
-  databaseURL:"https://legitiers-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId:"legitiers",
-  storageBucket:"legitiers.firebasestorage.app",
-  messagingSenderId:"459932032482",
-  appId:"1:459932032482:web:a329dbf9fbe715cfe82dbb"
+  apiKey: "AIzaSyDrlGkH0_qb5-aqgAr5SURzBXs7JCSvw58",
+  authDomain: "legitiers.firebaseapp.com",
+  databaseURL: "https://legitiers-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "legitiers",
+  storageBucket: "legitiers.firebasestorage.app",
+  messagingSenderId: "459932032482",
+  appId: "1:459932032482:web:a329dbf9fbe715cfe82dbb"
 };
-const ADMIN_UIDS = ["KGq9EmO3VkPCI8r97pPz2TkL0mk1"];
 
+const ADMIN_UIDS = ["KGq9EmO3VkPCI8r97pPz2TkL0mk1"];
 const app  = initializeApp(firebaseConfig);
 const db   = getDatabase(app);
 const auth = getAuth(app);
 
-const KITS        = ["Sword","Axe","Mace","Crystal","UHC","Pot","SMP","NetheriteOP"];
-const POINTS      = {HT1:60,LT1:45,HT2:30,LT2:20,HT3:10,LT3:6,HT4:4,LT4:3,HT5:2,LT5:1};
-const TIER_ORDER  = ["HT1","LT1","HT2","LT2","HT3","LT3","HT4","LT4","HT5","LT5"];
-const TITLE_BY_PTS= [[200,"Legendary"],[120,"Grand Master"],[60,"Master"],[30,"Expert"],[10,"Veteran"],[0,"Player"]];
-
-const KICONS = {
-  Sword:'icons/sword.png', Axe:'icons/axe.png', Mace:'icons/mace.png',
-  Crystal:'icons/crystal.png', UHC:'icons/uhc.png', Pot:'icons/pot.png',
-  SMP:'icons/smp.png', NetheriteOP:'icons/netheriteopt.png'
+const KITS       = ["Sword","Axe","Mace","Crystal","UHC","Pot","SMP","NetheriteOP"];
+const POINTS     = {HT1:60,LT1:45,HT2:30,LT2:20,HT3:10,LT3:6,HT4:4,LT4:3,HT5:2,LT5:1};
+const TIER_ORDER = ["HT1","LT1","HT2","LT2","HT3","LT3","HT4","LT4","HT5","LT5"];
+const TITLE_BY_PTS = [[200,"Legendary"],[120,"Grand Master"],[60,"Master"],[30,"Expert"],[10,"Veteran"],[0,"Player"]];
+const KIT_ICON   = {
+  Sword:"icons/sword.png", Axe:"icons/axe.png", Mace:"icons/mace.png",
+  Crystal:"icons/crystal.png", UHC:"icons/uhc.png", Pot:"icons/pot.png",
+  SMP:"icons/smp.png", NetheriteOP:"icons/netheriteopt.png"
 };
 
-function getTitle(pts){ for(const[m,t]of TITLE_BY_PTS)if(pts>=m)return t; return"Player"; }
+function getTitle(pts){ for(const[m,t] of TITLE_BY_PTS) if(pts>=m) return t; return "Player"; }
 
-let players={}, currentMode="Overall", isOwner=false;
+let players = {}, currentMode = "Overall", isOwner = false;
 
-// ── AUTH ──────────────────────────────────────
-onAuthStateChanged(auth, user=>{
+onAuthStateChanged(auth, user => {
   isOwner = !!(user && ADMIN_UIDS.includes(user.uid));
-  const btn=document.getElementById("ownerBtn");
-  const lbl=document.getElementById("ownerBtnLabel");
-  if(isOwner){ btn.classList.add("logged-in"); lbl.textContent="Panel";
-    document.getElementById("panel-user-info").textContent="Logged in as "+(user.email||""); }
-  else{ btn.classList.remove("logged-in"); lbl.textContent="Owner"; }
+  const btn = document.getElementById("ownerBtn");
+  const lbl = document.getElementById("ownerBtnLabel");
+  if(isOwner){
+    btn.classList.add("logged-in");
+    lbl.textContent = "Panel";
+    document.getElementById("panel-user-info").textContent = "Logged in as "+(user.email||"");
+  } else {
+    btn.classList.remove("logged-in");
+    lbl.textContent = "Owner";
+  }
 });
 
-// ── REALTIME LISTENER ─────────────────────────
-onValue(ref(db,"players"), snap=>{
-  const d=snap.val(); players={};
-  if(d) Object.values(d).forEach(p=>{ players[p.name]=p; });
-  render(); refreshDropdowns();
+onValue(ref(db,"players"), snap => {
+  const d = snap.val();
+  players = {};
+  if(d) Object.values(d).forEach(p => { players[p.name] = p; });
+  render();
+  refreshDropdowns();
 });
 
-// ── DB HELPERS ────────────────────────────────
-function dbKey(n){ return n.toLowerCase().replace(/[.#$/[\] ]/g,"_"); }
+function dbKey(n){ return n.toLowerCase().replace(/[.#$/[\]]/g,"_"); }
 async function dbSave(p){
-  if(!isOwner){ showMsg("❌ Not authorized","err"); throw new Error(); }
+  if(!isOwner){ showMsg("❌ Not authorized","err"); throw new Error("No auth"); }
   await set(ref(db,"players/"+dbKey(p.name)), p);
 }
 async function dbDel(name){
@@ -538,158 +550,174 @@ async function dbDel(name){
   await remove(ref(db,"players/"+dbKey(name)));
 }
 
-// ── RENDER ────────────────────────────────────
 function calcPts(p){ let t=0; for(let k in p.kits) if(!(p.retired&&p.retired[k])) t+=POINTS[p.kits[k]]||0; return t; }
 
-window.render = ()=>{
-  const q=document.getElementById("search").value.toLowerCase();
-  let list=Object.values(players);
-  list.forEach(p=>{ p._pts=calcPts(p); });
-  if(currentMode!=="Overall") list=list.filter(p=>p.kits&&p.kits[currentMode]);
-  if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
+function regionHtml(p){
+  const r = (p.region||"EU").toUpperCase();
+  const cls = r==="NA"?"reg-na":r==="AS"?"reg-as":r==="EU"?"reg-eu":"reg-other";
+  return `<span class="row-region ${cls}">${r}</span>`;
+}
+
+window.render = function(){
+  const q = document.getElementById("search").value.toLowerCase();
+  let list = Object.values(players);
+  list.forEach(p => { p._pts = calcPts(p); });
+  if(currentMode !== "Overall") list = list.filter(p => p.kits && p.kits[currentMode]);
+  if(q) list = list.filter(p => p.name.toLowerCase().includes(q));
   list.sort((a,b)=>{ if(a.banned&&!b.banned)return 1; if(!a.banned&&b.banned)return -1; return b._pts-a._pts; });
 
   if(!list.length){
-    document.getElementById("list").innerHTML=`<div class="empty-state">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-      <h3>No players found</h3><p>Add players via the Owner Panel</p></div>`;
+    document.getElementById("list").innerHTML = `<div class="empty-state"><h3>No players found</h3><p>Add players via the Owner Panel</p></div>`;
     return;
   }
 
-  let html="";
-  list.forEach((p,i)=>{
+  let html = "";
+  list.forEach((p,i) => {
     const topCls = i===0?"top1":i===1?"top2":i===2?"top3":"";
-    const bannedHtml = p.banned?`<span class="banned-tag">BANNED</span>`:"";
-    const title = getTitle(p._pts);
-    const region = p.region||"EU";
-    let kitsToShow = currentMode==="Overall"
-      ? KITS.filter(k=>p.kits&&p.kits[k])
-      : (p.kits&&p.kits[currentMode]?[currentMode]:[]);
-    kitsToShow.sort((a,b)=>TIER_ORDER.indexOf(p.kits[a])-TIER_ORDER.indexOf(p.kits[b]));
+    const title   = getTitle(p._pts);
 
-    const kitBadges = kitsToShow.map(k=>{
-      const tier=p.kits[k], retired=p.retired&&p.retired[k];
-      const tc="t-"+tier.toLowerCase();
-      return `<div class="kit-badge ${tc}${retired?" is-retired":""}" title="${k} · ${tier} · ${POINTS[tier]||0}pts">
-        <div class="kit-icon-circle">
-          <img src="${KICONS[k]}" alt="${k}" onerror="this.style.opacity='.3'">
+    let kitsToShow = currentMode === "Overall"
+      ? KITS.filter(k => p.kits && p.kits[k])
+      : (p.kits && p.kits[currentMode] ? [currentMode] : []);
+    kitsToShow.sort((a,b) => TIER_ORDER.indexOf(p.kits[a]) - TIER_ORDER.indexOf(p.kits[b]));
+
+    const badges = kitsToShow.map(k => {
+      const tier    = p.kits[k];
+      const retired = p.retired && p.retired[k];
+      const tc      = retired ? "tc-retired" : "tc-"+tier.toLowerCase();
+      return `<div class="kit-badge ${tc}${retired?" is-retired":""}" title="${k}: ${tier}${retired?" (Retired)":""}">
+        <div class="kit-circle">
+          <img src="${KIT_ICON[k]||''}" alt="${k}" onerror="this.style.opacity='.15'">
         </div>
-        <div class="kit-tier-label">${tier}</div>
+        <div class="kit-label">${retired?"R":tier}</div>
       </div>`;
     }).join("");
 
-    html+=`<div class="player-row ${topCls}${p.banned?" banned":""}">
-      <div class="col-rank-avatar">
-        <div class="rank-num">${i+1}.</div>
-        <div class="row-avatar">
-          <img src="https://render.crafty.gg/3d/bust/${encodeURIComponent(p.name)}?overlay=true"
-            alt="${p.name}" loading="lazy"
-            onerror="this.src='https://render.crafty.gg/3d/bust/MHF_Steve?overlay=true'">
-        </div>
+    html += `<div class="player-row ${topCls}${p.banned?" banned":""}">
+      <div class="row-num">${i+1}.</div>
+      <div class="row-avatar">
+        <img src="https://render.crafty.gg/3d/bust/${encodeURIComponent(p.name)}?overlay=true" alt="${p.name}" loading="lazy"
+          onerror="this.src='https://render.crafty.gg/3d/bust/MHF_Steve?overlay=true'">
       </div>
-      <div class="col-player-info">
-        <div class="row-name">${p.name}${bannedHtml}</div>
+      <div class="row-info">
+        <div class="row-name">
+          ${p.name}
+          ${p.banned?`<span class="banned-tag">BANNED</span>`:""}
+        </div>
         <div class="row-sub">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-          <span>${title} (${p._pts} points)</span>
+          <svg class="row-sub-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 9H4.5a2.5 2.5 0 010-5H6M18 9h1.5a2.5 2.5 0 000-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0012 0V2z"/></svg>
+          ${title} (${p._pts} points)
         </div>
       </div>
-      <div class="col-region">
-        <div class="region-badge region-${region}">${region}</div>
-      </div>
-      <div class="col-kits">${kitBadges}</div>
+      <div class="row-region-cell">${regionHtml(p)}</div>
+      <div class="row-tiers">${badges}</div>
     </div>`;
   });
-  document.getElementById("list").innerHTML=html;
+  document.getElementById("list").innerHTML = html;
 };
 
-// ── MODE SWITCH ───────────────────────────────
-window.switchMode = (mode,el)=>{
-  currentMode=mode;
-  document.querySelectorAll(".mode-tab").forEach(t=>t.classList.remove("active"));
+window.switchMode = function(mode, el){
+  currentMode = mode;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   el.classList.add("active");
   render();
 };
 
-// ── LOGIN ─────────────────────────────────────
-window.openOwnerLogin = ()=>{
+window.openOwnerLogin = function(){
   if(isOwner){ document.getElementById("ownerBackdrop").classList.add("open"); refreshDropdowns(); return; }
   document.getElementById("loginBackdrop").classList.add("open");
-  document.getElementById("loginEmail").value="";
-  document.getElementById("loginPw").value="";
-  document.getElementById("loginErr").textContent="";
-  setTimeout(()=>document.getElementById("loginEmail").focus(),80);
+  document.getElementById("loginEmail").value = "";
+  document.getElementById("loginPw").value = "";
+  document.getElementById("loginErr").textContent = "";
+  setTimeout(() => document.getElementById("loginEmail").focus(), 80);
 };
-window.doLogin = async()=>{
-  const email=document.getElementById("loginEmail").value.trim();
-  const pw=document.getElementById("loginPw").value;
-  const errEl=document.getElementById("loginErr");
-  errEl.textContent="";
+
+window.doLogin = async function(){
+  const email = document.getElementById("loginEmail").value.trim();
+  const pw    = document.getElementById("loginPw").value;
+  const errEl = document.getElementById("loginErr");
+  errEl.textContent = "";
   try{
-    const uc=await signInWithEmailAndPassword(auth,email,pw);
+    const uc = await signInWithEmailAndPassword(auth, email, pw);
     if(!ADMIN_UIDS.includes(uc.user.uid)){ await signOut(auth); errEl.textContent="❌ No admin access."; return; }
     document.getElementById("loginBackdrop").classList.remove("open");
-    refreshDropdowns(); document.getElementById("ownerBackdrop").classList.add("open");
-  }catch(e){ errEl.textContent="❌ "+(e.code==="auth/invalid-credential"?"Wrong email or password.":e.message); }
+    refreshDropdowns();
+    document.getElementById("ownerBackdrop").classList.add("open");
+  } catch(e){ errEl.textContent="❌ "+(e.code==="auth/invalid-credential"?"Wrong email or password.":e.message); }
 };
-window.doLogout = async()=>{ await signOut(auth); document.getElementById("ownerBackdrop").classList.remove("open"); };
-window.bgClose = (id,e)=>{ if(e.target===document.getElementById(id)) document.getElementById(id).classList.remove("open"); };
 
-// ── OWNER PANEL ───────────────────────────────
+window.doLogout = async function(){
+  await signOut(auth);
+  document.getElementById("ownerBackdrop").classList.remove("open");
+};
+
+window.bgClose = function(id,e){
+  if(e.target===document.getElementById(id)) document.getElementById(id).classList.remove("open");
+};
+
 function showMsg(t,tp){ const el=document.getElementById("panelMsg"); el.className="msg "+tp; el.textContent=t; setTimeout(()=>{el.className="msg";el.textContent="";},3500); }
 function normName(n){ return n.charAt(0).toUpperCase()+n.slice(1); }
 
-window.addTier = async()=>{
-  let name=document.getElementById("f-name").value.trim();
+window.addTier = async function(){
+  let name = document.getElementById("f-name").value.trim();
   const kit=document.getElementById("f-kit").value, tier=document.getElementById("f-tier").value;
-  if(!name){showMsg("❌ Enter a player name","err");return;}
-  name=normName(name);
-  const existing=Object.keys(players).find(k=>k.toLowerCase()===name.toLowerCase());
-  const key=existing||name;
-  if(!players[key]) players[key]={name:key,kits:{},retired:{},banned:false,region:"EU"};
+  if(!name){ showMsg("❌ Enter player name","err"); return; }
+  name = normName(name);
+  const existing = Object.keys(players).find(k=>k.toLowerCase()===name.toLowerCase());
+  const key = existing||name;
+  if(!players[key]) players[key]={name:key,kits:{},retired:{},banned:false};
   players[key].kits[kit]=tier;
   showMsg("⏳ Saving...","ok");
   await dbSave(players[key]);
   showMsg(`✅ ${key} → ${kit} ${tier}`,"ok");
 };
-window.removeTier = async()=>{
+
+window.removeTier = async function(){
   const name=document.getElementById("r-player").value, kit=document.getElementById("r-kit").value;
-  if(!name){showMsg("❌ Select a player","err");return;}
-  if(!players[name]?.kits[kit]){showMsg("❌ No tier found","err");return;}
+  if(!name){ showMsg("❌ Select a player","err"); return; }
+  if(!players[name]?.kits[kit]){ showMsg("❌ No tier found","err"); return; }
   delete players[name].kits[kit];
   if(players[name].retired) delete players[name].retired[kit];
-  if(Object.keys(players[name].kits).length===0) await dbDel(name);
-  else await dbSave(players[name]);
+  if(Object.keys(players[name].kits).length===0){ await dbDel(name); }
+  else { await dbSave(players[name]); }
   showMsg(`✅ Removed ${kit} from ${name}`,"ok");
 };
-window.toggleRetire = async()=>{
+
+window.toggleRetire = async function(){
   const name=document.getElementById("ret-player").value, kit=document.getElementById("ret-kit").value;
-  if(!name||!players[name]){showMsg("❌ Select a player","err");return;}
-  if(!players[name].kits[kit]){showMsg("❌ No tier in this kit","err");return;}
+  if(!name||!players[name]){ showMsg("❌ Select a player","err"); return; }
+  if(!players[name].kits[kit]){ showMsg("❌ No tier in this kit","err"); return; }
   if(!players[name].retired) players[name].retired={};
   players[name].retired[kit]=!players[name].retired[kit];
   await dbSave(players[name]);
   showMsg(`✅ ${name} ${kit} → ${players[name].retired[kit]?"Retired":"Active"}`,"ok");
 };
-window.toggleBan = async()=>{
+
+window.toggleBan = async function(){
   const name=document.getElementById("ban-player").value;
-  if(!name||!players[name]){showMsg("❌ Select a player","err");return;}
+  if(!name||!players[name]){ showMsg("❌ Select a player","err"); return; }
   players[name].banned=!players[name].banned;
   await dbSave(players[name]);
   showMsg(`✅ ${name} → ${players[name].banned?"Banned":"Unbanned"}`,"ok");
 };
-window.resetAll = async()=>{
-  if(!confirm("Delete ALL data?"))return; if(!confirm("Really sure?"))return;
+
+window.resetAll = async function(){
+  if(!confirm("Delete ALL data? Cannot be undone!")) return;
+  if(!confirm("Really sure?")) return;
   for(const n of Object.keys(players)) await dbDel(n);
-  showMsg("✅ Cleared","ok");
+  showMsg("✅ All data cleared","ok");
 };
+
 function refreshDropdowns(){
   const names=Object.keys(players);
   ["r-player","ban-player","ret-player"].forEach(id=>{
-    const sel=document.getElementById(id); if(!sel)return;
+    const sel=document.getElementById(id); if(!sel) return;
     sel.innerHTML='<option value="">— Player —</option>'+names.map(n=>`<option value="${n}">${n}${players[n].banned?" [BANNED]":""}</option>`).join("");
   });
 }
+
+// search input
+document.getElementById("search").addEventListener("input", render);
 </script>
 </body>
 </html>
