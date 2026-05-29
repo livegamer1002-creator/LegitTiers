@@ -492,23 +492,25 @@ async function dbLoad(){
 }
 
 async function dbUpsert(p){
-  // fetch existing row first to merge kits safely
-  try{
-    const r=await fetch(SUPA_URL+"/rest/v1/players?name=eq."+encodeURIComponent(p.name)+"&select=kits,retired",{headers:SUPA_HEADERS});
-    const rows=await r.json();
-    if(rows&&rows.length>0){
-      // merge existing kits with new ones
-      const existingKits=rows[0].kits||{};
-      const existingRetired=rows[0].retired||{};
-      p.kits={...existingKits,...p.kits};
-      p.retired={...existingRetired,...p.retired};
-    }
-  }catch(e){}
-  await fetch(SUPA_URL+"/rest/v1/players",{
-    method:"POST",
-    headers:{...SUPA_HEADERS,"Prefer":"resolution=merge-duplicates,return=minimal"},
-    body:JSON.stringify({name:p.name,mc_name:p.mcName||p.name,kits:p.kits,retired:p.retired,banned:p.banned||false})
-  });
+  // check if player already exists in DB
+  const checkR=await fetch(SUPA_URL+"/rest/v1/players?name=eq."+encodeURIComponent(p.name)+"&select=id",{headers:SUPA_HEADERS});
+  const existing=await checkR.json();
+  const payload={name:p.name,mc_name:p.mcName||p.name,kits:p.kits,retired:p.retired||{},banned:p.banned||false};
+  if(existing&&existing.length>0){
+    // player exists → PATCH (update full row including all kits)
+    await fetch(SUPA_URL+"/rest/v1/players?name=eq."+encodeURIComponent(p.name),{
+      method:"PATCH",
+      headers:{...SUPA_HEADERS,"Prefer":"return=minimal"},
+      body:JSON.stringify(payload)
+    });
+  } else {
+    // new player → INSERT
+    await fetch(SUPA_URL+"/rest/v1/players",{
+      method:"POST",
+      headers:{...SUPA_HEADERS,"Prefer":"return=minimal"},
+      body:JSON.stringify(payload)
+    });
+  }
 }
 
 async function dbDelete(name){
