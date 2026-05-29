@@ -296,20 +296,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:60px;
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="nlg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#ec4899"/>
-        </linearGradient>
-      </defs>
-      <rect width="32" height="32" rx="9" fill="url(#nlg)" opacity=".15"/>
-      <rect width="32" height="32" rx="9" fill="none" stroke="url(#nlg)" stroke-width="1.2" opacity=".6"/>
-      <line x1="16" y1="5" x2="16" y2="23" stroke="url(#nlg)" stroke-width="2.2" stroke-linecap="round"/>
-      <line x1="11" y1="14" x2="21" y2="14" stroke="url(#nlg)" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M15 23 L16 27 L17 23" stroke="url(#nlg)" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
-      <circle cx="16" cy="5.5" r="1.8" fill="url(#nlg)"/>
-    </svg>
-    <span class="nav-logo-text">LegitTiers</span>
+    <img class="nav-logo-icon" src="logo.png" alt="LegitTiers" onerror="this.style.display='none'">
   </div>
   <div class="nav-right">
     <a class="nav-link" href="https://discord.gg/Q7BYQDTg76" target="_blank">
@@ -334,35 +321,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:60px;
     </div>
     <div class="sidebar-label">Gamemodes</div>
     <div class="sidebar-item" onclick="switchMode('Sword',this)">
-      <svg class="si-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="m13 19 9-9"/><path d="m2 22 3-1 1 3"/></svg>
+      <img class="si-icon" src="icons/sword.png" style="width:16px;height:16px;object-fit:contain;">
       Sword <span class="sidebar-badge" id="badge-Sword">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('Axe',this)">
-      <svg class="si-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m14 12-8.5 8.5a2.12 2.12 0 0 1-3-3L11 9"/><path d="m21 3-9 9"/><path d="M15 3h6v6"/></svg>
+      <img class="si-icon" src="icons/axe.png" style="width:16px;height:16px;object-fit:contain;">
       Axe <span class="sidebar-badge" id="badge-Axe">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('Mace',this)">
-      <svg class="si-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="15" y2="16"/></svg>
+      <img class="si-icon" src="icons/mace.png" style="width:16px;height:16px;object-fit:contain;">
       Mace <span class="sidebar-badge" id="badge-Mace">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('Crystal',this)">
-      <svg class="si-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="8.5" x2="22" y2="8.5"/></svg>
+      <img class="si-icon" src="icons/crystal.png" style="width:16px;height:16px;object-fit:contain;">
       Crystal <span class="sidebar-badge" id="badge-Crystal">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('UHC',this)">
-      <svg class="si-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <img class="si-icon" src="icons/uhc.png" style="width:16px;height:16px;object-fit:contain;">
       UHC <span class="sidebar-badge" id="badge-UHC">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('Pot',this)">
-      <svg class="si-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6l2 4H7z"/><path d="M7 7c0 5 1 9 5 12 4-3 5-7 5-12"/></svg>
+      <img class="si-icon" src="icons/pot.png" style="width:16px;height:16px;object-fit:contain;">
       Pot <span class="sidebar-badge" id="badge-Pot">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('SMP',this)">
-      <svg class="si-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <img class="si-icon" src="icons/smp.png" style="width:16px;height:16px;object-fit:contain;">
       SMP <span class="sidebar-badge" id="badge-SMP">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('NetheriteOP',this)">
-      <svg class="si-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <img class="si-icon" src="icons/netheriteopt.png" style="width:16px;height:16px;object-fit:contain;">
       NethOP <span class="sidebar-badge" id="badge-NetheriteOP">0</span>
     </div>
   </aside>
@@ -505,6 +492,18 @@ async function dbLoad(){
 }
 
 async function dbUpsert(p){
+  // fetch existing row first to merge kits safely
+  try{
+    const r=await fetch(SUPA_URL+"/rest/v1/players?name=eq."+encodeURIComponent(p.name)+"&select=kits,retired",{headers:SUPA_HEADERS});
+    const rows=await r.json();
+    if(rows&&rows.length>0){
+      // merge existing kits with new ones
+      const existingKits=rows[0].kits||{};
+      const existingRetired=rows[0].retired||{};
+      p.kits={...existingKits,...p.kits};
+      p.retired={...existingRetired,...p.retired};
+    }
+  }catch(e){}
   await fetch(SUPA_URL+"/rest/v1/players",{
     method:"POST",
     headers:{...SUPA_HEADERS,"Prefer":"resolution=merge-duplicates,return=minimal"},
