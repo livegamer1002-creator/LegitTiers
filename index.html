@@ -6,7 +6,7 @@
 <title>LegitTiers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
@@ -26,7 +26,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   background-image:linear-gradient(#7c3aed07 1px,transparent 1px),linear-gradient(90deg,#7c3aed07 1px,transparent 1px);
   background-size:48px 48px;}
 
-/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
   display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;
   background:rgba(6,6,15,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);}
@@ -42,8 +41,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
 .nav-link svg{width:15px;height:15px;flex-shrink:0;}
 .btn-owner{border-color:#ec489930!important;color:#ec4899!important;}
 .btn-owner:hover{background:rgba(236,72,153,0.1)!important;border-color:#ec489960!important;}
+.btn-owner.logged-in{border-color:#34d39930!important;color:#34d399!important;}
+.btn-owner.logged-in:hover{background:rgba(52,211,153,0.1)!important;}
 
-/* ── LAYOUT ── */
 .layout{display:flex;padding-top:140px;min-height:100vh;position:relative;z-index:1;}
 .sidebar{width:210px;min-width:210px;padding:1.25rem 0;border-right:1px solid var(--border);
   position:sticky;top:140px;height:calc(100vh - 140px);overflow-y:auto;}
@@ -55,13 +55,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
   transition:all .15s;border:1px solid transparent;}
 .sidebar-item:hover{color:var(--text);background:var(--surface2);}
 .sidebar-item.active{color:var(--text);background:var(--surface2);border-color:var(--border2);}
-.sidebar-item .si-icon{width:16px;height:16px;flex-shrink:0;opacity:.65;}
+.sidebar-item .si-icon{width:16px;height:16px;flex-shrink:0;opacity:.65;object-fit:contain;}
 .sidebar-item.active .si-icon{opacity:1;}
 .sidebar-badge{margin-left:auto;background:var(--bg4);font-size:10px;font-weight:700;
   padding:1px 6px;border-radius:20px;color:var(--text3);}
 .sidebar-item.active .sidebar-badge{background:rgba(124,58,237,.2);color:var(--p2);}
 
-/* ── MAIN ── */
 .main{flex:1;padding:1.75rem 1.75rem 4rem;min-width:0;}
 .hero{margin-bottom:1.5rem;}
 .hero-title{font-family:'Rajdhani',sans-serif;font-size:2.2rem;font-weight:700;
@@ -72,7 +71,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
   padding:6px 14px;font-size:12px;color:var(--text2);}
 .stat-chip b{color:var(--text);font-weight:700;}
 
-/* ── SEARCH ── */
 .search-wrap{position:relative;margin-bottom:1.25rem;}
 .search-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);
   width:15px;height:15px;color:var(--text3);pointer-events:none;}
@@ -81,165 +79,94 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
 #search:focus{border-color:#7c3aed55;}
 #search::placeholder{color:var(--text3);}
 
-/* ── PLAYER ROW — exact MCTiers style ── */
 .player-row{
   display:flex;align-items:center;
   border-radius:12px;margin-bottom:6px;
   transition:all .18s;cursor:pointer;position:relative;overflow:hidden;
-  border:1px solid var(--border);
-  background:var(--surface);
-  min-height:68px;
+  border:1px solid var(--border);background:var(--surface);min-height:68px;
 }
 .player-row:hover{border-color:var(--border2);background:var(--surface2);}
 
-/* rank accent stripe on left */
-.row-accent{
-  width:52px;min-width:52px;height:100%;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;
-  color:var(--text3);
-  background:transparent;
-  flex-shrink:0;
-}
+.row-accent{width:52px;min-width:52px;height:100%;display:flex;align-items:center;justify-content:center;
+  font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;color:var(--text3);
+  background:transparent;flex-shrink:0;}
 
-/* TOP 1/2/3 accents — full stripe behind rank + avatar */
 .player-row.top1{border-color:rgba(251,191,36,.35);background:var(--surface);}
-.player-row.top1::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;
-  width:130px;
+.player-row.top1::before{content:'';position:absolute;left:0;top:0;bottom:0;width:130px;
   background:linear-gradient(90deg,#b8860b 0%,#9a6f00 40%,#7a5500 65%,transparent 100%);
-  clip-path:polygon(0 0,88% 0,100% 100%,0 100%);
-  z-index:0;opacity:.85;
-}
+  clip-path:polygon(0 0,88% 0,100% 100%,0 100%);z-index:0;opacity:.85;}
 .player-row.top1 .row-accent{background:transparent;color:#fde68a;font-size:19px;font-weight:800;position:relative;z-index:1;}
-
 .player-row.top2{border-color:rgba(203,213,225,.28);background:var(--surface);}
-.player-row.top2::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;
-  width:130px;
+.player-row.top2::before{content:'';position:absolute;left:0;top:0;bottom:0;width:130px;
   background:linear-gradient(90deg,#6b7280 0%,#4b5563 40%,#374151 65%,transparent 100%);
-  clip-path:polygon(0 0,88% 0,100% 100%,0 100%);
-  z-index:0;opacity:.85;
-}
+  clip-path:polygon(0 0,88% 0,100% 100%,0 100%);z-index:0;opacity:.85;}
 .player-row.top2 .row-accent{background:transparent;color:#e2e8f0;font-size:19px;font-weight:800;position:relative;z-index:1;}
-
 .player-row.top3{border-color:rgba(205,127,50,.3);background:var(--surface);}
-.player-row.top3::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;
-  width:130px;
+.player-row.top3::before{content:'';position:absolute;left:0;top:0;bottom:0;width:130px;
   background:linear-gradient(90deg,#7c3d12 0%,#6b3310 40%,#552a0e 65%,transparent 100%);
-  clip-path:polygon(0 0,88% 0,100% 100%,0 100%);
-  z-index:0;opacity:.85;
-}
+  clip-path:polygon(0 0,88% 0,100% 100%,0 100%);z-index:0;opacity:.85;}
 .player-row.top3 .row-accent{background:transparent;color:#fed7aa;font-size:19px;font-weight:800;position:relative;z-index:1;}
-
 .player-row.banned{opacity:.38;}
 
-/* avatar */
-.row-avatar{
-  width:48px;height:48px;border-radius:9px;overflow:hidden;
-  background:transparent;flex-shrink:0;margin-right:12px;
-  position:relative;z-index:1;
-  filter:drop-shadow(0 0 4px rgba(0,0,0,0.7)) drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
-}
+.row-avatar{width:48px;height:48px;border-radius:9px;overflow:hidden;
+  background:transparent;flex-shrink:0;margin-right:12px;position:relative;z-index:1;
+  filter:drop-shadow(0 0 4px rgba(0,0,0,.7));}
 .row-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
-
-/* name block */
 .row-info{display:flex;flex-direction:column;gap:2px;flex:0 0 180px;min-width:0;margin-left:8px;}
 .row-name{font-weight:700;font-size:15px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .row-sub{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:5px;}
 .row-sub svg{width:12px;height:12px;color:var(--p2);}
 .banned-tag{font-size:9px;font-weight:800;background:#ff444422;border:1px solid #ff444455;
   color:#ff6666;padding:1px 6px;border-radius:4px;}
-
-/* region badge (NA / EU etc) — optional, shown as placeholder */
-.row-region{
-  flex:0 0 44px;width:44px;height:44px;border-radius:10px;
+.row-region{flex:0 0 44px;width:44px;height:44px;border-radius:10px;
   background:var(--bg4);border:1px solid var(--border2);
   display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-weight:800;color:var(--text3);
-  flex-shrink:0;margin-right:10px;
-}
+  font-size:10px;font-weight:800;color:var(--text3);flex-shrink:0;margin-right:10px;}
+.row-kits{display:flex;align-items:center;gap:5px;flex-wrap:wrap;flex:1;padding:0 14px 0 6px;justify-content:flex-end;}
 
-/* kit badges area — flex wrap */
-.row-kits{
-  display:flex;align-items:center;gap:5px;flex-wrap:wrap;
-  flex:1;padding:0 14px 0 6px;
-  justify-content:flex-end;
-}
-
-/* single kit badge: horizontal pill — icon + tier label side by side */
-.kit-badge{
-  display:inline-flex;flex-direction:row;align-items:center;gap:5px;
-  padding:5px 9px 5px 6px;
-  border-radius:8px;
-  border:1px solid var(--border2);
-  background:var(--bg4);
-  transition:all .15s;cursor:default;
-  white-space:nowrap;
-}
-.kit-badge-icon{
-  width:20px;height:20px;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.kit-badge-icon svg{width:16px;height:16px;}
+.kit-badge{display:inline-flex;flex-direction:row;align-items:center;gap:5px;
+  padding:5px 9px 5px 6px;border-radius:8px;border:1px solid var(--border2);
+  background:var(--bg4);transition:all .15s;cursor:default;white-space:nowrap;}
+.kit-badge-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.kit-badge-icon img{width:16px;height:16px;object-fit:contain;}
 .kit-badge:hover{transform:translateY(-2px);}
-.kit-badge-tier{
-  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:800;
-  letter-spacing:.3px;line-height:1;
-}
+.kit-badge-tier{font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:800;letter-spacing:.3px;line-height:1;}
 .kit-badge.is-retired{opacity:.5;}
-.kit-badge.is-retired .kit-badge-tier::after{content:' R';font-size:9px;color:#38bdf8;}
-.kit-badge.is-retired .kit-badge-icon::after{content:'R';position:absolute;font-size:8px;color:#38bdf8;}
 
-/* tier colors for pill badges */
 .tier-ht1{border-color:rgba(251,191,36,.5)!important;background:rgba(251,191,36,.12)!important;}
-.tier-ht1 .kit-badge-tier,.tier-ht1 .kit-badge-icon svg{color:#fbbf24;}
+.tier-ht1 .kit-badge-tier{color:#fbbf24;}
 .tier-lt1{border-color:rgba(251,146,60,.5)!important;background:rgba(251,146,60,.12)!important;}
-.tier-lt1 .kit-badge-tier,.tier-lt1 .kit-badge-icon svg{color:#fb923c;}
+.tier-lt1 .kit-badge-tier{color:#fb923c;}
 .tier-ht2{border-color:rgba(163,230,53,.4)!important;background:rgba(163,230,53,.1)!important;}
-.tier-ht2 .kit-badge-tier,.tier-ht2 .kit-badge-icon svg{color:#a3e635;}
+.tier-ht2 .kit-badge-tier{color:#a3e635;}
 .tier-lt2{border-color:rgba(52,211,153,.4)!important;background:rgba(52,211,153,.1)!important;}
-.tier-lt2 .kit-badge-tier,.tier-lt2 .kit-badge-icon svg{color:#34d399;}
+.tier-lt2 .kit-badge-tier{color:#34d399;}
 .tier-ht3{border-color:rgba(56,189,248,.4)!important;background:rgba(56,189,248,.1)!important;}
-.tier-ht3 .kit-badge-tier,.tier-ht3 .kit-badge-icon svg{color:#38bdf8;}
+.tier-ht3 .kit-badge-tier{color:#38bdf8;}
 .tier-lt3{border-color:rgba(129,140,248,.4)!important;background:rgba(129,140,248,.1)!important;}
-.tier-lt3 .kit-badge-tier,.tier-lt3 .kit-badge-icon svg{color:#818cf8;}
+.tier-lt3 .kit-badge-tier{color:#818cf8;}
 .tier-ht4{border-color:rgba(192,132,252,.4)!important;background:rgba(192,132,252,.1)!important;}
-.tier-ht4 .kit-badge-tier,.tier-ht4 .kit-badge-icon svg{color:#c084fc;}
+.tier-ht4 .kit-badge-tier{color:#c084fc;}
 .tier-lt4{border-color:rgba(244,114,182,.4)!important;background:rgba(244,114,182,.1)!important;}
-.tier-lt4 .kit-badge-tier,.tier-lt4 .kit-badge-icon svg{color:#f472b6;}
+.tier-lt4 .kit-badge-tier{color:#f472b6;}
 .tier-ht5{border-color:rgba(148,163,184,.3)!important;background:rgba(148,163,184,.08)!important;}
-.tier-ht5 .kit-badge-tier,.tier-ht5 .kit-badge-icon svg{color:#94a3b8;}
+.tier-ht5 .kit-badge-tier{color:#94a3b8;}
 .tier-lt5{border-color:rgba(100,116,139,.3)!important;background:rgba(100,116,139,.08)!important;}
-.tier-lt5 .kit-badge-tier,.tier-lt5 .kit-badge-icon svg{color:#64748b;}
+.tier-lt5 .kit-badge-tier{color:#64748b;}
 
-/* single-mode view: big tier chip */
-.tier-big{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:8px 20px;border-radius:10px;
-  font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:800;
-}
-
-/* ── EMPTY ── */
 .empty-state{text-align:center;padding:5rem 2rem;color:var(--text3);}
 .empty-state svg{width:44px;height:44px;margin:0 auto 1rem;opacity:.25;display:block;}
 .empty-state h3{font-size:17px;color:var(--text2);margin-bottom:.4rem;}
 
-/* ── TABLE HEADER ── */
-.table-header{
-  display:flex;align-items:center;
-  padding:0 0 0 0;margin-bottom:4px;
-  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);
-}
+.table-header{display:flex;align-items:center;padding:0;margin-bottom:4px;
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);}
 .th-rank{width:52px;min-width:52px;text-align:center;flex-shrink:0;}
-.th-gap{width:60px;flex-shrink:0;}/* avatar */
+.th-gap{width:60px;flex-shrink:0;}
 .th-player{flex:0 0 180px;}
 .th-region{flex:0 0 54px;}
 .th-kits{flex:1;text-align:right;padding-right:14px;}
 
-/* ── MODALS ── */
+/* MODALS */
 .modal-backdrop{position:fixed;inset:0;background:rgba(6,6,15,.88);z-index:999990;
   backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;}
 .modal-backdrop.open{display:flex;}
@@ -256,7 +183,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
 .modal h3{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;
   color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.6rem;}
 .form-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:.6rem;}
-.form-row input,.form-row select,.modal input[type=password]{
+.form-row input,.form-row select,.modal input[type=email],.modal input[type=password]{
   flex:1;min-width:90px;background:var(--surface2);border:1px solid var(--border2);
   color:var(--text);padding:9px 11px;border-radius:9px;font-size:13px;
   font-family:'DM Sans',sans-serif;outline:none;transition:border .2s;}
@@ -275,17 +202,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
 .msg.ok{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);color:#34d399;display:block;}
 .msg.err{background:rgba(255,68,68,.1);border:1px solid rgba(255,68,68,.3);color:#ff6666;display:block;}
 .login-box{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;
-  width:340px;max-width:96vw;padding:1.75rem;text-align:center;}
+  width:360px;max-width:96vw;padding:1.75rem;text-align:center;}
 .login-box h2{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;
   background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.2rem;}
 .login-box p{color:var(--text3);font-size:12px;margin-bottom:1.1rem;}
-.login-box input[type=password]{width:100%;background:var(--surface2);border:1px solid var(--border2);
+.login-box input{width:100%;background:var(--surface2);border:1px solid var(--border2);
   color:var(--text);padding:10px 12px;border-radius:9px;font-size:13px;font-family:'DM Sans',sans-serif;
   outline:none;margin-bottom:.7rem;display:block;}
 .login-err{color:#ff6666;font-size:11px;margin-top:.4rem;min-height:14px;}
 
 @media(max-width:860px){.sidebar{display:none;}.row-info{flex:0 0 130px;}.row-region{display:none;}}
-@media(max-width:600px){.main{padding:1rem;}.hero-title{font-size:1.7rem;}.row-kits{gap:4px;}.kit-badge{min-width:32px;}.kit-badge-icon{width:30px;height:30px;}}
+@media(max-width:600px){.main{padding:1rem;}.hero-title{font-size:1.7rem;}.row-kits{gap:4px;}}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:#ffffff12;border-radius:99px;}
 </style>
 </head>
@@ -293,7 +220,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
 <div class="bg-mesh"></div>
 <div class="bg-grid"></div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">
     <img class="nav-logo-icon" src="logo.png" alt="LegitTiers" onerror="this.style.display='none'">
@@ -303,16 +229,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
       Discord
     </a>
-    <div class="nav-link btn-owner" onclick="openOwnerLogin()">
+    <div class="nav-link btn-owner" id="ownerBtn" onclick="openOwnerLogin()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      Owner
+      <span id="ownerBtnLabel">Owner</span>
     </div>
   </div>
 </nav>
 
-<!-- LAYOUT -->
 <div class="layout">
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-label" style="margin-top:.5rem">Rankings</div>
     <div class="sidebar-item active" onclick="switchMode('Overall',this)">
@@ -321,40 +245,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
     </div>
     <div class="sidebar-label">Gamemodes</div>
     <div class="sidebar-item" onclick="switchMode('Sword',this)">
-      <img class="si-icon" src="icons/sword.png" style="width:16px;height:16px;object-fit:contain;">
-      Sword <span class="sidebar-badge" id="badge-Sword">0</span>
+      <img class="si-icon" src="icons/sword.png">Sword <span class="sidebar-badge" id="badge-Sword">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('Axe',this)">
-      <img class="si-icon" src="icons/axe.png" style="width:16px;height:16px;object-fit:contain;">
-      Axe <span class="sidebar-badge" id="badge-Axe">0</span>
+      <img class="si-icon" src="icons/axe.png">Axe <span class="sidebar-badge" id="badge-Axe">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('Mace',this)">
-      <img class="si-icon" src="icons/mace.png" style="width:16px;height:16px;object-fit:contain;">
-      Mace <span class="sidebar-badge" id="badge-Mace">0</span>
+      <img class="si-icon" src="icons/mace.png">Mace <span class="sidebar-badge" id="badge-Mace">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('Crystal',this)">
-      <img class="si-icon" src="icons/crystal.png" style="width:16px;height:16px;object-fit:contain;">
-      Crystal <span class="sidebar-badge" id="badge-Crystal">0</span>
+      <img class="si-icon" src="icons/crystal.png">Crystal <span class="sidebar-badge" id="badge-Crystal">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('UHC',this)">
-      <img class="si-icon" src="icons/uhc.png" style="width:16px;height:16px;object-fit:contain;">
-      UHC <span class="sidebar-badge" id="badge-UHC">0</span>
+      <img class="si-icon" src="icons/uhc.png">UHC <span class="sidebar-badge" id="badge-UHC">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('Pot',this)">
-      <img class="si-icon" src="icons/pot.png" style="width:16px;height:16px;object-fit:contain;">
-      Pot <span class="sidebar-badge" id="badge-Pot">0</span>
+      <img class="si-icon" src="icons/pot.png">Pot <span class="sidebar-badge" id="badge-Pot">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('SMP',this)">
-      <img class="si-icon" src="icons/smp.png" style="width:16px;height:16px;object-fit:contain;">
-      SMP <span class="sidebar-badge" id="badge-SMP">0</span>
+      <img class="si-icon" src="icons/smp.png">SMP <span class="sidebar-badge" id="badge-SMP">0</span>
     </div>
     <div class="sidebar-item" onclick="switchMode('NetheriteOP',this)">
-      <img class="si-icon" src="icons/netheriteopt.png" style="width:16px;height:16px;object-fit:contain;">
-      NethOP <span class="sidebar-badge" id="badge-NetheriteOP">0</span>
+      <img class="si-icon" src="icons/netheriteopt.png">NethOP <span class="sidebar-badge" id="badge-NetheriteOP">0</span>
     </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
     <div class="hero">
       <div class="hero-title" id="hero-title">Overall Rankings</div>
@@ -373,7 +288,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
       <div class="th-gap"></div>
       <div class="th-player">Player</div>
       <div class="th-region"></div>
-      <div class="th-kits" id="th-kits-label">Kits</div>
+      <div class="th-kits">Kits</div>
     </div>
     <div id="list"></div>
   </main>
@@ -383,8 +298,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
 <div class="modal-backdrop" id="loginBackdrop" onclick="bgClose('loginBackdrop',event)">
   <div class="login-box" onclick="event.stopPropagation()">
     <h2>🔐 Owner Login</h2>
-    <p>Enter your owner password</p>
-    <input type="password" id="ownerPw" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+    <p>Login with your owner account</p>
+    <input type="email" id="loginEmail" placeholder="E-Mail" onkeydown="if(event.key==='Enter')doLogin()">
+    <input type="password" id="loginPw" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="btn btn-grad btn-full" onclick="doLogin()">Login</button>
     <div class="login-err" id="loginErr"></div>
     <div style="margin-top:.6rem"><button class="btn btn-outline" onclick="document.getElementById('loginBackdrop').classList.remove('open')">Cancel</button></div>
@@ -395,7 +311,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
 <div class="modal-backdrop" id="ownerBackdrop" onclick="bgClose('ownerBackdrop',event)">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-title">⚙ Owner Panel</div>
-    <div class="modal-sub">Manage players, tiers, bans and retirements</div>
+    <div class="modal-sub" id="panel-user-info">Manage players, tiers, bans</div>
     <button class="modal-close" onclick="document.getElementById('ownerBackdrop').classList.remove('open')">✕ Close</button>
     <div id="panelMsg"></div>
 
@@ -442,16 +358,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:10000;height:140px;
     <hr>
     <h3>⚠ Danger Zone</h3>
     <button class="btn btn-red" onclick="resetAll()">Reset ALL Data</button>
-    <div style="margin-top:.75rem"><button class="btn btn-outline" onclick="doLogout()">Logout</button></div>
+    <div style="margin-top:.75rem"><button class="btn btn-outline" onclick="doLogout()">🚪 Logout</button></div>
   </div>
 </div>
 
-<script>
-// ── CONFIG ──────────────────────────────────
-const OWNER_PASSWORD = "legittiers2024";
-const KITS = ["Sword","Axe","Mace","Crystal","UHC","Pot","SMP","NetheriteOP"];
-const POINTS = {HT1:60,LT1:45,HT2:30,LT2:20,HT3:10,LT3:6,HT4:4,LT4:3,HT5:2,LT5:1};
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
+// ── FIREBASE CONFIG ──────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyDrlGkH0_qb5-aqgAr5SURzBXs7JCSvw58",
+  authDomain: "legitiers.firebaseapp.com",
+  databaseURL: "https://legitiers-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "legitiers",
+  storageBucket: "legitiers.firebasestorage.app",
+  messagingSenderId: "459932032482",
+  appId: "1:459932032482:web:a329dbf9fbe715cfe82dbb"
+};
+
+// ── ALLOWED ADMIN UIDs ───────────────────────
+const ADMIN_UIDS = ["KGq9EmO3VkPCI8r97pPz2TkL0mk1"];
+
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
+const auth = getAuth(app);
+
+const KITS   = ["Sword","Axe","Mace","Crystal","UHC","Pot","SMP","NetheriteOP"];
+const POINTS = {HT1:60,LT1:45,HT2:30,LT2:20,HT3:10,LT3:6,HT4:4,LT4:3,HT5:2,LT5:1};
+const TIER_ORDER = ["HT1","LT1","HT2","LT2","HT3","LT3","HT4","LT4","HT5","LT5"];
 const KSVG = {
   Sword:`<img src="icons/sword.png" style="width:16px;height:16px;object-fit:contain;">`,
   Axe:`<img src="icons/axe.png" style="width:16px;height:16px;object-fit:contain;">`,
@@ -462,260 +398,213 @@ const KSVG = {
   SMP:`<img src="icons/smp.png" style="width:16px;height:16px;object-fit:contain;">`,
   NetheriteOP:`<img src="icons/netheriteopt.png" style="width:16px;height:16px;object-fit:contain;">`
 };
+const TITLE_BY_PTS=[[200,"Legendary"],[120,"Grand Master"],[60,"Master"],[30,"Expert"],[10,"Veteran"],[0,"Player"]];
+function getTitle(pts){for(const[min,t]of TITLE_BY_PTS)if(pts>=min)return t;return"Player";}
 
-// Title per tier (like "Combat Master" in MCTiers)
-const TITLE_BY_PTS = [
-  [200,"Legendary"],
-  [120,"Grand Master"],
-  [60,"Master"],
-  [30,"Expert"],
-  [10,"Veteran"],
-  [0,"Player"]
-];
-function getTitle(pts){
-  for(const [min,title] of TITLE_BY_PTS) if(pts>=min) return title;
-  return "Player";
-}
+let players={}, currentMode="Overall", isOwner=false;
 
-// ── SUPABASE ─────────────────────────────────
-const SUPA_URL = "https://wyznposqafezkkiogymk.supabase.co";
-const SUPA_KEY = "sb_publishable_pLaMMUqYV5eHgp7qbjMeOQ_V3te3M3r";
-const SUPA_HEADERS = {"Content-Type":"application/json","apikey":SUPA_KEY,"Authorization":"Bearer "+SUPA_KEY};
-
-async function dbLoad(){
-  const r=await fetch(SUPA_URL+"/rest/v1/players?select=*",{headers:SUPA_HEADERS});
-  const rows=await r.json();
-  players={};
-  rows.forEach(row=>{
-    players[row.name]={name:row.name,mcName:row.mc_name||row.name,kits:row.kits||{},retired:row.retired||{},banned:row.banned||false};
-  });
-}
-
-async function dbUpsert(p){
-  // check if player already exists in DB
-  const checkR=await fetch(SUPA_URL+"/rest/v1/players?name=eq."+encodeURIComponent(p.name)+"&select=id",{headers:SUPA_HEADERS});
-  const existing=await checkR.json();
-  const payload={name:p.name,mc_name:p.mcName||p.name,kits:p.kits,retired:p.retired||{},banned:p.banned||false};
-  if(existing&&existing.length>0){
-    // player exists → PATCH (update full row including all kits)
-    await fetch(SUPA_URL+"/rest/v1/players?name=eq."+encodeURIComponent(p.name),{
-      method:"PATCH",
-      headers:{...SUPA_HEADERS,"Prefer":"return=minimal"},
-      body:JSON.stringify(payload)
-    });
+// ── AUTH STATE ───────────────────────────────
+onAuthStateChanged(auth, user => {
+  isOwner = user && ADMIN_UIDS.includes(user.uid);
+  const btn = document.getElementById("ownerBtn");
+  const lbl = document.getElementById("ownerBtnLabel");
+  if(isOwner){
+    btn.classList.add("logged-in");
+    lbl.textContent = "Panel";
+    document.getElementById("panel-user-info").textContent = "Logged in as " + (user.email||"");
   } else {
-    // new player → INSERT
-    await fetch(SUPA_URL+"/rest/v1/players",{
-      method:"POST",
-      headers:{...SUPA_HEADERS,"Prefer":"return=minimal"},
-      body:JSON.stringify(payload)
-    });
+    btn.classList.remove("logged-in");
+    lbl.textContent = "Owner";
   }
+});
+
+// ── REALTIME DB LISTENER ─────────────────────
+onValue(ref(db,"players"), snap => {
+  const d = snap.val();
+  players = {};
+  if(d) Object.values(d).forEach(p => { players[p.name] = p; });
+  render();
+  refreshDropdowns();
+});
+
+// ── DB SAVE / DELETE ─────────────────────────
+function dbKey(name){ return name.toLowerCase().replace(/[.#$/[\]]/g,"_"); }
+async function dbSave(p){
+  if(!isOwner){ showMsg("❌ Not authorized","err"); throw new Error("Not authorized"); }
+  await set(ref(db,"players/"+dbKey(p.name)), p);
 }
-
-async function dbDelete(name){
-  await fetch(SUPA_URL+"/rest/v1/players?name=eq."+encodeURIComponent(name),{
-    method:"DELETE",headers:SUPA_HEADERS
-  });
-}
-
-// ── STATE ────────────────────────────────────
-let players = {};
-let currentMode = "Overall";
-let isOwner = false;
-
-function calcPoints(p){
-  let t=0;
-  for(let k in p.kits){if(!(p.retired&&p.retired[k])) t+=POINTS[p.kits[k]]||0;}
-  return t;
+async function dbDel(name){
+  if(!isOwner){ showMsg("❌ Not authorized","err"); return; }
+  await remove(ref(db,"players/"+dbKey(name)));
 }
 
 // ── RENDER ────────────────────────────────────
-function render(){
-  const q=document.getElementById("search").value.toLowerCase();
-  let list=Object.values(players);
-  list.forEach(p=>{p._pts=calcPoints(p);});
+function calcPts(p){ let t=0; for(let k in p.kits) if(!(p.retired&&p.retired[k])) t+=POINTS[p.kits[k]]||0; return t; }
+
+window.render = function(){
+  const q = document.getElementById("search").value.toLowerCase();
+  let list = Object.values(players);
+  list.forEach(p=>{ p._pts=calcPts(p); });
   if(currentMode!=="Overall") list=list.filter(p=>p.kits&&p.kits[currentMode]);
   if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
-  list.sort((a,b)=>{if(a.banned&&!b.banned)return 1;if(!a.banned&&b.banned)return -1;return b._pts-a._pts;});
+  list.sort((a,b)=>{ if(a.banned&&!b.banned)return 1; if(!a.banned&&b.banned)return -1; return b._pts-a._pts; });
 
-  // sidebar badges
-  KITS.forEach(k=>{const el=document.getElementById("badge-"+k);if(el)el.textContent=Object.values(players).filter(p=>p.kits&&p.kits[k]).length;});
-  document.getElementById("badge-Overall").textContent=Object.keys(players).length;
-  document.getElementById("stat-players").textContent=list.length;
-  document.getElementById("stat-mode").textContent=currentMode;
+  KITS.forEach(k=>{ const el=document.getElementById("badge-"+k); if(el) el.textContent=Object.values(players).filter(p=>p.kits&&p.kits[k]).length; });
+  document.getElementById("badge-Overall").textContent = Object.keys(players).length;
+  document.getElementById("stat-players").textContent = list.length;
+  document.getElementById("stat-mode").textContent = currentMode;
 
   if(!list.length){
     document.getElementById("list").innerHTML=`<div class="empty-state">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
       <h3>No players found</h3><p>Add players via the Owner Panel</p></div>`;
     return;
   }
 
   let html="";
   list.forEach((p,i)=>{
-    const topCls = i===0?"top1":i===1?"top2":i===2?"top3":"";
-    const bannedHtml = p.banned?`<span class="banned-tag">BANNED</span>`:"";
-    const title = getTitle(p._pts);
-
-    // kits to show
-    let kitsToShow = [];
-    if(currentMode==="Overall"){
-      kitsToShow = KITS.filter(k=>p.kits&&p.kits[k]);
-    } else {
-      if(p.kits&&p.kits[currentMode]) kitsToShow=[currentMode];
-    }
-
-    const TIER_ORDER=["HT1","LT1","HT2","LT2","HT3","LT3","HT4","LT4","HT5","LT5"];
-    kitsToShow.sort((a,b)=>{
-      const ta=TIER_ORDER.indexOf(p.kits[a]);
-      const tb=TIER_ORDER.indexOf(p.kits[b]);
-      return ta-tb;
-    });
-    const kitBadges = kitsToShow.map(k=>{
-      const tier = p.kits[k];
-      const retired = p.retired&&p.retired[k];
-      const tc = "tier-"+tier.toLowerCase();
-      const pts = POINTS[tier]||0;
-      const tooltip = `${tier}: ${pts} point${pts!==1?"s":""}`;
-      return `<div class="kit-badge ${tc}${retired?" is-retired":""}" title="${tooltip}">
+    const topCls=i===0?"top1":i===1?"top2":i===2?"top3":"";
+    const bannedHtml=p.banned?`<span class="banned-tag">BANNED</span>`:"";
+    const title=getTitle(p._pts);
+    let kitsToShow=currentMode==="Overall"?KITS.filter(k=>p.kits&&p.kits[k]):(p.kits&&p.kits[currentMode]?[currentMode]:[]);
+    kitsToShow.sort((a,b)=>TIER_ORDER.indexOf(p.kits[a])-TIER_ORDER.indexOf(p.kits[b]));
+    const kitBadges=kitsToShow.map(k=>{
+      const tier=p.kits[k], retired=p.retired&&p.retired[k], tc="tier-"+tier.toLowerCase();
+      return`<div class="kit-badge ${tc}${retired?" is-retired":""}" title="${tier}: ${POINTS[tier]||0} pts">
         <div class="kit-badge-icon">${KSVG[k]||""}</div>
-        <div class="kit-badge-tier">${tier}${retired?" <span style='color:#38bdf8;font-size:8px'>R</span>":""}</div>
+        <div class="kit-badge-tier">${tier}${retired?` <span style='color:#38bdf8;font-size:8px'>R</span>`:""}</div>
       </div>`;
     }).join("");
-
-    // rank display
-    const rankLabel = `${i+1}.`;
-    const rankFontSize = i<3?"":"";
-    // correct minecraft username capitalisation from cache
-    const displayName = p.mcName || p.name;
-
     html+=`<div class="player-row ${topCls}${p.banned?" banned":""}">
-      <div class="row-accent">${rankLabel}</div>
+      <div class="row-accent">${i+1}.</div>
       <div class="row-avatar" style="margin-left:10px">
-        <img src="https://render.crafty.gg/3d/bust/${encodeURIComponent(p.name)}?overlay=true"
-          alt="${displayName}" loading="lazy"
+        <img src="https://render.crafty.gg/3d/bust/${encodeURIComponent(p.name)}?overlay=true" alt="${p.name}" loading="lazy"
           onerror="this.src='https://render.crafty.gg/3d/bust/MHF_Steve?overlay=true'">
       </div>
       <div class="row-info">
-        <div class="row-name">${displayName}${bannedHtml}</div>
+        <div class="row-name">${p.name}${bannedHtml}</div>
         <div class="row-sub">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-          <span>${title} (${p._pts} points)</span>
+          <span>${title} (${p._pts} pts)</span>
         </div>
       </div>
       <div class="row-region">EU</div>
       <div class="row-kits">${kitBadges}</div>
     </div>`;
   });
-
   document.getElementById("list").innerHTML=html;
-}
+};
 
-// ── MODE ─────────────────────────────────────
-function switchMode(mode,el){
+// ── MODE ──────────────────────────────────────
+window.switchMode = function(mode,el){
   currentMode=mode;
   document.querySelectorAll(".sidebar-item").forEach(s=>s.classList.remove("active"));
   el.classList.add("active");
   document.getElementById("hero-title").textContent=mode+" Rankings";
   render();
-}
+};
 
 // ── LOGIN ─────────────────────────────────────
-function openOwnerLogin(){
-  if(isOwner){document.getElementById("ownerBackdrop").classList.add("open");refreshDropdowns();return;}
+window.openOwnerLogin = function(){
+  if(isOwner){ document.getElementById("ownerBackdrop").classList.add("open"); refreshDropdowns(); return; }
   document.getElementById("loginBackdrop").classList.add("open");
-  document.getElementById("ownerPw").value="";document.getElementById("loginErr").textContent="";
-  setTimeout(()=>document.getElementById("ownerPw").focus(),80);
-}
-function doLogin(){
-  if(document.getElementById("ownerPw").value===OWNER_PASSWORD){
-    isOwner=true;
+  document.getElementById("loginEmail").value="";
+  document.getElementById("loginPw").value="";
+  document.getElementById("loginErr").textContent="";
+  setTimeout(()=>document.getElementById("loginEmail").focus(),80);
+};
+
+window.doLogin = async function(){
+  const email=document.getElementById("loginEmail").value.trim();
+  const pw=document.getElementById("loginPw").value;
+  const errEl=document.getElementById("loginErr");
+  errEl.textContent="";
+  try{
+    const uc = await signInWithEmailAndPassword(auth, email, pw);
+    if(!ADMIN_UIDS.includes(uc.user.uid)){
+      await signOut(auth);
+      errEl.textContent="❌ No admin access for this account.";
+      return;
+    }
     document.getElementById("loginBackdrop").classList.remove("open");
-    refreshDropdowns();document.getElementById("ownerBackdrop").classList.add("open");
-  } else {
-    document.getElementById("loginErr").textContent="❌ Wrong password";
-    document.getElementById("ownerPw").style.borderColor="#ff444466";
-    setTimeout(()=>document.getElementById("ownerPw").style.borderColor="",1200);
+    refreshDropdowns();
+    document.getElementById("ownerBackdrop").classList.add("open");
+  } catch(e){
+    errEl.textContent="❌ "+(e.code==="auth/invalid-credential"?"Wrong email or password.":e.message);
   }
-}
-function doLogout(){isOwner=false;document.getElementById("ownerBackdrop").classList.remove("open");}
-function bgClose(id,e){if(e.target===document.getElementById(id))document.getElementById(id).classList.remove("open");}
+};
+
+window.doLogout = async function(){
+  await signOut(auth);
+  document.getElementById("ownerBackdrop").classList.remove("open");
+};
+
+window.bgClose = function(id,e){
+  if(e.target===document.getElementById(id)) document.getElementById(id).classList.remove("open");
+};
 
 // ── OWNER PANEL ───────────────────────────────
-function showMsg(t,tp){const el=document.getElementById("panelMsg");el.className="msg "+tp;el.textContent=t;setTimeout(()=>{el.className="msg";el.textContent="";},3500);}
-function normName(n){return n.charAt(0).toUpperCase()+n.slice(1);}
+function showMsg(t,tp){ const el=document.getElementById("panelMsg"); el.className="msg "+tp; el.textContent=t; setTimeout(()=>{el.className="msg";el.textContent="";},3500); }
+function normName(n){ return n.charAt(0).toUpperCase()+n.slice(1); }
 
-// fetch correct Minecraft username capitalisation from Mojang
-async function fetchMcName(name){
-  try{
-    const r=await fetch(`https://api.mojang.com/users/profiles/minecraft/${encodeURIComponent(name)}`);
-    if(r.ok){const d=await r.json();return d.name||name;}
-  }catch(e){}
-  return name;
-}
-
-async function addTier(){
+window.addTier = async function(){
   let name=document.getElementById("f-name").value.trim();
-  const kit=document.getElementById("f-kit").value,tier=document.getElementById("f-tier").value;
+  const kit=document.getElementById("f-kit").value, tier=document.getElementById("f-tier").value;
   if(!name){showMsg("❌ Enter a player name","err");return;}
   name=normName(name);
-  const mcName=await fetchMcName(name);
-  // case-insensitive lookup so existing kits are preserved
-  const existingKey=Object.keys(players).find(k=>k.toLowerCase()===mcName.toLowerCase());
-  const key=existingKey||mcName;
-  if(!players[key]) players[key]={name:key,mcName:key,kits:{},retired:{},banned:false};
-  else players[key].mcName=mcName; // update display name
+  const existing=Object.keys(players).find(k=>k.toLowerCase()===name.toLowerCase());
+  const key=existing||name;
+  if(!players[key]) players[key]={name:key,kits:{},retired:{},banned:false};
   players[key].kits[kit]=tier;
-  players[key].name=key;
   showMsg("⏳ Saving...","ok");
-  await dbUpsert(players[key]);
-  render();refreshDropdowns();showMsg(`✅ ${mcName} → ${kit} ${tier}`,"ok");
-  // name bleibt stehen damit man mehrere Kits hintereinander geben kann
-}
-async function removeTier(){
-  const name=document.getElementById("r-player").value,kit=document.getElementById("r-kit").value;
+  await dbSave(players[key]);
+  showMsg(`✅ ${key} → ${kit} ${tier}`,"ok");
+};
+
+window.removeTier = async function(){
+  const name=document.getElementById("r-player").value, kit=document.getElementById("r-kit").value;
   if(!name){showMsg("❌ Select a player","err");return;}
-  if(!players[name]||!players[name].kits[kit]){showMsg("❌ No tier found","err");return;}
+  if(!players[name]?.kits[kit]){showMsg("❌ No tier found","err");return;}
   delete players[name].kits[kit];
   if(players[name].retired) delete players[name].retired[kit];
-  if(Object.keys(players[name].kits).length===0){
-    await dbDelete(name);delete players[name];
-  } else {
-    await dbUpsert(players[name]);
-  }
-  render();refreshDropdowns();showMsg(`✅ Removed ${kit} from ${name}`,"ok");
-}
-async function toggleRetire(){
-  const name=document.getElementById("ret-player").value,kit=document.getElementById("ret-kit").value;
+  if(Object.keys(players[name].kits).length===0){ await dbDel(name); }
+  else { await dbSave(players[name]); }
+  showMsg(`✅ Removed ${kit} from ${name}`,"ok");
+};
+
+window.toggleRetire = async function(){
+  const name=document.getElementById("ret-player").value, kit=document.getElementById("ret-kit").value;
   if(!name||!players[name]){showMsg("❌ Select a player","err");return;}
   if(!players[name].kits[kit]){showMsg("❌ No tier in this kit","err");return;}
   if(!players[name].retired) players[name].retired={};
   players[name].retired[kit]=!players[name].retired[kit];
-  await dbUpsert(players[name]);
-  render();showMsg(`✅ ${name} ${kit} → ${players[name].retired[kit]?"Retired":"Active"}`,"ok");
-}
-async function toggleBan(){
+  await dbSave(players[name]);
+  showMsg(`✅ ${name} ${kit} → ${players[name].retired[kit]?"Retired":"Active"}`,"ok");
+};
+
+window.toggleBan = async function(){
   const name=document.getElementById("ban-player").value;
   if(!name||!players[name]){showMsg("❌ Select a player","err");return;}
   players[name].banned=!players[name].banned;
-  await dbUpsert(players[name]);
-  render();refreshDropdowns();showMsg(`✅ ${name} → ${players[name].banned?"Banned":"Unbanned"}`,"ok");
-}
-async function resetAll(){
-  if(!confirm("Delete ALL data?"))return;if(!confirm("Really sure?"))return;
-  await fetch(SUPA_URL+"/rest/v1/players?name=neq.",{method:"DELETE",headers:SUPA_HEADERS});
-  players={};render();refreshDropdowns();showMsg("✅ Cleared","ok");
-}
+  await dbSave(players[name]);
+  showMsg(`✅ ${name} → ${players[name].banned?"Banned":"Unbanned"}`,"ok");
+};
+
+window.resetAll = async function(){
+  if(!confirm("Delete ALL data? Cannot be undone!"))return;
+  if(!confirm("Really sure?"))return;
+  const allPlayers=Object.keys(players);
+  for(const name of allPlayers) await dbDel(name);
+  showMsg("✅ All data cleared","ok");
+};
+
 function refreshDropdowns(){
   const names=Object.keys(players);
   ["r-player","ban-player","ret-player"].forEach(id=>{
-    const sel=document.getElementById(id);if(!sel)return;
+    const sel=document.getElementById(id); if(!sel)return;
     sel.innerHTML='<option value="">— Player —</option>'+names.map(n=>`<option value="${n}">${n}${players[n].banned?" [BANNED]":""}</option>`).join("");
   });
 }
-
-dbLoad().then(()=>render());
 </script>
 </body>
 </html>
