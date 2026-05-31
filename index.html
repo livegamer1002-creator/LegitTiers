@@ -73,7 +73,7 @@ nav{
 
 /* ── TABS ── */
 .tabs-card{
-  background:var(--card);border:3px solid #2a2a38;border-radius:16px;padding:10px;
+  background:var(--card);border:2px solid #2a2a38;border-radius:16px;padding:10px;
   display:flex;align-items:center;gap:3px;flex-wrap:wrap;margin-bottom:12px;
 }
 .tab-btn{
@@ -91,7 +91,7 @@ nav{
 .search-wrap svg{position:absolute;left:20px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--text3);pointer-events:none;}
 #search{
   width:100%;padding:18px 18px 18px 52px;
-  background:var(--card);border:3px solid #2a2a38;border-radius:14px;
+  background:var(--card);border:2px solid #2a2a38;border-radius:14px;
   color:var(--text);font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border .2s;
 }
 #search:focus{border-color:#38385a;}
@@ -159,14 +159,14 @@ nav{
 /* avatar contained entirely within the stripe */
 .row-avatar{
   position:absolute;
-  right:0;top:0;bottom:0;
+  right:8px;top:0;bottom:0;
   z-index:4;
-  width:95px;
+  width:88px;
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
 }
 .row-avatar img{
-  width:90px;height:90px;object-fit:contain;display:block;
+  width:82px;height:82px;object-fit:contain;display:block;
   filter:drop-shadow(0 4px 10px rgba(0,0,0,.7));
 }
 
@@ -187,25 +187,33 @@ nav{
 
 /* ── REGION ── */
 .row-region{display:none;}
-.eu-pill{
-  display:inline-flex;align-items:center;
-  padding:5px 12px;border-radius:20px;
-  font-size:11px;font-weight:800;letter-spacing:.6px;
-  background:#082014;border:2px solid #1a7a3a;color:#35d870;
-  flex-shrink:0;
+/* region tag shown after kits */
+.region-tag{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:4px 10px;border-radius:6px;
+  font-size:11.5px;font-weight:800;letter-spacing:.5px;
+  flex-shrink:0;align-self:center;
 }
+.region-eu{background:#0a1f10;border:2px solid #1e7a38;color:#3dd870;}
+.region-na{background:#1a0a10;border:2px solid #7a1e2e;color:#d85060;}
+.region-as{background:#0a1020;border:2px solid #1e3a7a;color:#4080d8;}
+.region-??{background:#14141e;border:2px solid #28283a;color:#505070;}
 
 /* ── KIT BADGES ── */
 .row-kits{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:0 22px 0 0;justify-content:flex-end;}
 .kit-badge{
-  display:inline-flex;flex-direction:column;align-items:center;gap:4px;
-  border:none;background:transparent;
-  transition:transform .12s;cursor:default;min-width:36px;
+  display:inline-flex;flex-direction:column;align-items:center;gap:5px;
+  transition:transform .12s;cursor:default;min-width:40px;
 }
 .kit-badge:hover{transform:translateY(-2px);}
-.kit-badge-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;}
-.kit-badge-icon img{width:28px;height:28px;object-fit:contain;}
-.kit-badge-tier{font-family:'Inter',sans-serif;font-size:14px;font-weight:900;letter-spacing:.1px;line-height:1.2;text-align:center;}
+/* dark circle behind icon exactly like the MCTiers screenshot */
+.kit-badge-icon{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#1a1a28;border:2px solid #2a2a3e;
+}
+.kit-badge-icon img{width:22px;height:22px;object-fit:contain;}
+.kit-badge-tier{font-family:'Inter',sans-serif;font-size:13px;font-weight:900;letter-spacing:.1px;line-height:1.2;text-align:center;}
 .kit-badge.is-retired{opacity:.4;}
 
 /* tier colors */
@@ -240,18 +248,25 @@ nav{
 /* ── MODALS ── */
 .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:999990;backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;}
 .modal-backdrop.open{display:flex;}
-.profile-modal{background:#111116;border:3px solid #2e2e3e;border-radius:18px;width:400px;max-width:96vw;max-height:92vh;overflow-y:auto;padding:2rem 1.6rem 1.8rem;position:relative;animation:fadeUp .2s ease;}
+.profile-modal{background:#111116;border:3px solid #2e2e3e;border-radius:22px;width:420px;max-width:96vw;max-height:92vh;overflow-y:auto;padding:2rem 1.8rem 2rem;position:relative;animation:fadeUp .2s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 .profile-close{position:absolute;top:.9rem;right:.9rem;background:#1c1c28;border:1px solid #282838;color:var(--text2);border-radius:8px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;transition:all .15s;z-index:1;}
 .profile-close:hover{color:var(--text);background:#22223a;}
 .profile-header{display:flex;flex-direction:column;align-items:center;gap:.55rem;margin-bottom:1.4rem;}
-.profile-avatar-wrap{width:100px;height:100px;border-radius:14px;overflow:hidden;border:2px solid rgba(240,165,32,.5);background:#1a1a28;flex-shrink:0;}
-.profile-avatar-wrap.silver{border-color:rgba(150,165,190,.4);}
-.profile-avatar-wrap.bronze{border-color:rgba(180,100,50,.4);}
-.profile-avatar-wrap.default{border-color:var(--border);}
+.profile-avatar-wrap{
+  width:110px;height:110px;
+  border-radius:50%;
+  overflow:hidden;
+  border:3px solid rgba(240,165,32,.7);
+  background:#1a1a28;flex-shrink:0;
+  box-shadow:0 0 0 5px rgba(240,165,32,.12),0 4px 24px rgba(0,0,0,.5);
+}
+.profile-avatar-wrap.silver{border-color:rgba(150,165,190,.7);box-shadow:0 0 0 5px rgba(150,165,190,.1),0 4px 24px rgba(0,0,0,.5);}
+.profile-avatar-wrap.bronze{border-color:rgba(180,100,50,.7);box-shadow:0 0 0 5px rgba(180,100,50,.1),0 4px 24px rgba(0,0,0,.5);}
+.profile-avatar-wrap.default{border-color:rgba(80,80,120,.5);box-shadow:none;}
 .profile-avatar-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
 .profile-name{font-family:'Inter',sans-serif;font-size:1.3rem;font-weight:800;color:var(--text);}
-.profile-title-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px 5px 10px;border-radius:20px;background:rgba(240,165,32,.1);border:1px solid rgba(240,165,32,.28);font-size:12px;font-weight:700;color:#f0b840;}
+.profile-title-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px 7px 12px;border-radius:22px;background:linear-gradient(135deg,rgba(200,130,20,.2),rgba(240,170,30,.12));border:2px solid rgba(240,165,32,.5);font-size:13px;font-weight:800;color:#f0c030;box-shadow:0 2px 12px rgba(200,140,0,.15);}
 .profile-title-badge img{width:18px;height:18px;object-fit:contain;}
 .profile-region{font-size:11.5px;color:var(--text3);}
 .profile-namemc{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border-radius:8px;background:#14141e;border:1px solid #20202e;font-size:11.5px;color:var(--text2);text-decoration:none;transition:all .15s;}
@@ -265,21 +280,50 @@ nav{
 .discord-tag{font-size:10.5px;color:var(--text3);}
 .discord-view-btn{margin-left:auto;padding:5px 13px;border-radius:7px;background:#5865f2;color:#fff;border:none;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .15s;flex-shrink:0;font-family:'Inter',sans-serif;}
 .discord-view-btn:hover{background:#4752c4;}
-.profile-section-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;}
-.profile-position{display:flex;align-items:center;gap:11px;background:#14141e;border:1px solid #1e1e2c;border-radius:10px;padding:11px 14px;margin-bottom:1.2rem;}
-.pos-rank-block{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:17px;font-weight:800;flex-shrink:0;}
-.pos-rank-block.gold{background:linear-gradient(135deg,#c08010,#8a5500);color:#ffeebb;}
-.pos-rank-block.silver{background:linear-gradient(135deg,#606e80,#40505e);color:#d8e8f8;}
-.pos-rank-block.bronze{background:linear-gradient(135deg,#9a5a20,#6a3c0e);color:#fcd8a8;}
-.pos-rank-block.default{background:#1a1a28;border:1px solid var(--border);color:var(--text2);}
-.pos-info{display:flex;align-items:center;gap:7px;}
-.pos-trophy{width:17px;height:17px;color:var(--gold);}
-.pos-label{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;letter-spacing:.5px;color:var(--text);}
-.pos-pts{font-size:12px;color:var(--text2);}
-.profile-tiers-grid{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;background:#14141e;border:1px solid #1e1e2c;border-radius:10px;padding:14px;}
-.profile-kit-badge{display:inline-flex;flex-direction:column;align-items:center;gap:4px;padding:8px 10px 6px;border-radius:9px;border:1px solid var(--border);background:#0f0f18;min-width:44px;}
-.profile-kit-badge img{width:20px;height:20px;object-fit:contain;}
-.profile-kit-tier{font-family:'Inter',sans-serif;font-size:11px;font-weight:800;text-align:center;}
+.profile-section-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:.7rem;margin-top:.2rem;}
+.profile-position{
+  display:flex;align-items:center;gap:0;
+  background:#0f0f16;border:2px solid #222232;border-radius:12px;
+  padding:0;margin-bottom:1.4rem;overflow:hidden;min-height:58px;
+}
+/* shimmer stripe inside position block */
+.pos-rank-stripe{
+  position:relative;width:80px;min-width:80px;height:58px;
+  overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+}
+.pos-rank-stripe svg{position:absolute;inset:0;width:100%;height:100%;}
+.pos-rank-num{
+  position:relative;z-index:2;
+  font-family:'Inter',sans-serif;font-weight:900;font-style:italic;
+  font-size:26px;color:#fff8e0;
+  text-shadow:0 2px 8px rgba(0,0,0,.5);
+  line-height:1;
+}
+.pos-rank-stripe.silver .pos-rank-num{color:#e8f0f8;}
+.pos-rank-stripe.bronze .pos-rank-num{color:#fce8cc;}
+.pos-rank-stripe.default .pos-rank-num{color:#8090a8;}
+.pos-info{display:flex;align-items:center;gap:8px;padding:0 16px;flex:1;}
+.pos-trophy{width:18px;height:18px;color:var(--gold);}
+.pos-label{font-family:'Inter',sans-serif;font-size:15px;font-weight:800;letter-spacing:.5px;color:var(--text);}
+.pos-pts{font-size:12.5px;color:var(--text2);}
+/* legacy - keep but hide */
+.pos-rank-block{display:none;}
+.profile-tiers-grid{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;background:#0f0f16;border:2px solid #222232;border-radius:14px;padding:16px 12px;}
+.profile-kit-badge{
+  display:inline-flex;flex-direction:column;align-items:center;gap:6px;
+  padding:10px 10px 8px;border-radius:12px;
+  border:2px solid #252535;background:#141420;
+  min-width:50px;transition:transform .12s;
+}
+.profile-kit-badge:hover{transform:translateY(-2px);}
+/* dark circle behind icon in profile modal */
+.profile-kit-badge .prof-icon-wrap{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#1a1a28;border:2px solid #2a2a3e;
+}
+.profile-kit-badge img{width:24px;height:24px;object-fit:contain;}
+.profile-kit-tier{font-family:'Inter',sans-serif;font-size:12px;font-weight:900;text-align:center;}
 .modal{background:#111116;border:3px solid #2e2e3e;border-radius:16px;width:540px;max-width:96vw;max-height:90vh;overflow-y:auto;padding:1.75rem;position:relative;}
 .modal-title{font-family:'Inter',sans-serif;font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#5030c8,#b030a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.2rem;}
 .modal-sub{color:var(--text3);font-size:11.5px;margin-bottom:1.25rem;}
@@ -387,7 +431,7 @@ nav{
     </div>
     <div class="profile-section-label">POSITION</div>
     <div class="profile-position">
-      <div class="pos-rank-block" id="prof-rank-block"></div>
+      <div class="pos-rank-stripe" id="prof-pos-stripe"></div>
       <div class="pos-info">
         <svg class="pos-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M17 3H7L5 8c0 3.31 3.13 6 7 6s7-2.69 7-6L17 3zM5 8H3a2 2 0 0 0 0 4h2M19 8h2a2 2 0 0 0 0 4h-2"/></svg>
         <span class="pos-label" id="prof-pos-label"></span>
@@ -530,7 +574,7 @@ function kitBadgeHTML(k,tier,retired,large=false){
   const color=TIER_COLORS[tier]||"#888";
   if(large){
     return`<div class="profile-kit-badge ${tc}${retired?" is-retired":""}" title="${k} – ${tier}">
-      <img src="${KIT_ICONS[k]||""}" style="width:20px;height:20px;object-fit:contain;" onerror="this.style.display='none'">
+      <div class="prof-icon-wrap"><img src="${KIT_ICONS[k]||""}" style="width:24px;height:24px;object-fit:contain;" onerror="this.style.display='none'"></div>
       <div class="profile-kit-tier" style="color:${color}">${tier}</div>
     </div>`;
   }
@@ -585,7 +629,7 @@ window.render=function(){
           <span>${title}&nbsp;(${p._pts} points)</span>
         </div>
       </div>
-      <div class="row-kits">${kitBadges}${p.region==="EU"?'<span class="eu-pill">EU</span>':""}</div>
+      <div class="row-kits">${kitBadges}<span class="region-tag region-${(p.region||'??').toLowerCase()}">${p.region||'??'}</span></div>
     </div>`;
   });
   document.getElementById("list").innerHTML=html;
@@ -609,8 +653,18 @@ window.openProfile=function(name){
   const dcCard=document.getElementById("prof-discord-card");
   if(p.discord){dcCard.style.display="flex";document.getElementById("prof-discord-img").src=p.discord.avatar||"";document.getElementById("prof-discord-name").textContent=p.discord.name||name;document.getElementById("prof-discord-tag").textContent=p.discord.tag||"";document.getElementById("prof-discord-btn").onclick=()=>{if(p.discord.url)window.open(p.discord.url,"_blank");};}
   else{dcCard.style.display="none";}
-  const rb=document.getElementById("prof-rank-block");
-  rb.className="pos-rank-block "+rankClass;rb.textContent=rank+".";
+  // Build shimmer SVG for position stripe
+  const posStripe=document.getElementById("prof-pos-stripe");
+  if(posStripe){
+    const uid="prof";
+    let svgStr,numColor;
+    if(rankClass==="gold"){svgStr=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none"><defs><g id="bp${uid}" fill="#f0c863"><path d="M100 0h40L55 100H15zM70 0h15L0 100h-15z"/><animateTransform attributeName="transform" calcMode="spline" dur="2.2s" keySplines="0.9 0 0.1 1" keyTimes="0;1" repeatCount="indefinite" type="translate" values="-150 0;220 0"/></g></defs><path fill="#efba3c" stroke="#f0c863" stroke-width="3" d="M0 0h200l-35 100H0z"/><clipPath id="ap${uid}"><path d="M0 0h200l-35 100H0z"/></clipPath><use clip-path="url(#ap${uid})" href="#bp${uid}"/></svg>`;numColor="#fff8e0";}
+    else if(rankClass==="silver"){svgStr=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none"><defs><g id="bp${uid}" fill="#a0b0b7"><path d="M100 0h40L55 100H15zM70 0h15L0 100h-15z"/><animateTransform attributeName="transform" calcMode="spline" dur="2.2s" keySplines="0.9 0 0.1 1" keyTimes="0;1" repeatCount="indefinite" type="translate" values="-150 0;220 0"/></g></defs><path fill="#879ea5" stroke="#a0b0b7" stroke-width="3" d="M0 0h200l-35 100H0z"/><clipPath id="ap${uid}"><path d="M0 0h200l-35 100H0z"/></clipPath><use clip-path="url(#ap${uid})" href="#bp${uid}"/></svg>`;numColor="#e8f0f8";}
+    else if(rankClass==="bronze"){svgStr=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none"><defs><g id="bp${uid}" fill="#c58152"><path d="M100 0h40L55 100H15zM70 0h15L0 100h-15z"/><animateTransform attributeName="transform" calcMode="spline" dur="2.2s" keySplines="0.9 0 0.1 1" keyTimes="0;1" repeatCount="indefinite" type="translate" values="-150 0;220 0"/></g></defs><path fill="#b56329" stroke="#c58152" stroke-width="3" d="M0 0h200l-35 100H0z"/><clipPath id="ap${uid}"><path d="M0 0h200l-35 100H0z"/></clipPath><use clip-path="url(#ap${uid})" href="#bp${uid}"/></svg>`;numColor="#fce8cc";}
+    else{svgStr=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none"><path fill="#1a2030" stroke="#252d3d" stroke-width="3" d="M0 0h200l-35 100H0z"/></svg>`;numColor="#8090a8";}
+    posStripe.className="pos-rank-stripe "+rankClass;
+    posStripe.innerHTML=svgStr+`<span class="pos-rank-num" style="color:${numColor}">${rank}.</span>`;
+  }
   document.getElementById("prof-pos-label").textContent="OVERALL";
   document.getElementById("prof-pos-pts").textContent=`(${p._pts} points)`;
   let kitsToShow=KITS.filter(k=>p.kits&&p.kits[k]);
