@@ -117,45 +117,66 @@ nav{
 .player-row.top2{border-color:rgba(135,158,165,.25);}
 .player-row.top3{border-color:rgba(181,99,41,.3);}
 
-/* ── RANK BLOCK — the parallelogram SVG badge ── */
-.row-rank{
-  /* fixed width so the SVG fills naturally */
-  width:110px;min-width:110px;
+/* ── RANK + AVATAR ZONE — stripe with avatar sitting on it ── */
+.row-rank-avatar{
+  /* combined stripe+avatar block, like the screenshot */
+  position:relative;
   flex-shrink:0;
-  position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  /* no background — SVG provides it */
+  width:160px;min-width:160px;
+  overflow:hidden;
+  display:flex;align-items:center;
   background:transparent;
 }
-.row-rank svg.rank-bg{
-  position:absolute;inset:0;width:100%;height:100%;
-  /* preserve aspect, cover full block */
-  preserveAspectRatio:none;
-}
-/* embed SVG as inline so animation works */
-.row-rank .rank-svg-wrap{
+/* SVG stripe fills the entire left block */
+.row-rank-avatar .rank-svg-wrap{
   position:absolute;inset:0;
   display:flex;align-items:stretch;
 }
-.row-rank .rank-svg-wrap svg{width:100%;height:100%;}
+.row-rank-avatar .rank-svg-wrap svg{
+  width:100%;height:100%;
+}
 
+/* rank number — top-left corner, italic, bold, with dot */
 .rank-num{
-  position:relative;z-index:2;
-  font-family:'Inter',sans-serif;font-weight:900;line-height:1;
-  /* color per rank */
+  position:absolute;
+  top:50%;left:14px;
+  transform:translateY(-50%);
+  z-index:3;
+  font-family:'Inter',sans-serif;font-weight:900;font-style:italic;line-height:1;
+  letter-spacing:-1px;
 }
-.player-row.top1 .rank-num{color:#fff8e0;font-size:32px;text-shadow:0 2px 8px rgba(0,0,0,.4);}
-.player-row.top2 .rank-num{color:#e8f0f8;font-size:32px;text-shadow:0 2px 8px rgba(0,0,0,.4);}
-.player-row.top3 .rank-num{color:#fce8cc;font-size:32px;text-shadow:0 2px 8px rgba(0,0,0,.4);}
-.player-row:not(.top1):not(.top2):not(.top3) .rank-num{color:#3a3a58;font-size:24px;}
+.player-row.top1 .rank-num{
+  color:#fff8e0;font-size:34px;
+  text-shadow:0 2px 12px rgba(0,0,0,.7),0 0 20px rgba(240,185,60,.4);
+}
+.player-row.top2 .rank-num{
+  color:#e8f0f8;font-size:34px;
+  text-shadow:0 2px 12px rgba(0,0,0,.7),0 0 20px rgba(135,158,165,.4);
+}
+.player-row.top3 .rank-num{
+  color:#fce8cc;font-size:34px;
+  text-shadow:0 2px 12px rgba(0,0,0,.7),0 0 20px rgba(181,99,41,.4);
+}
+.player-row:not(.top1):not(.top2):not(.top3) .rank-num{
+  color:#8090a8;font-size:26px;
+  text-shadow:0 2px 6px rgba(0,0,0,.6);
+}
 
-/* ── AVATAR — no border-radius, no clipping ── */
+/* avatar positioned at the right side of the stripe, centered vertically */
 .row-avatar{
-  width:70px;height:70px;flex-shrink:0;
-  margin:auto 16px auto 14px;
-  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:4;
+  width:78px;height:78px;flex-shrink:0;
+  margin-left:auto;margin-right:10px;
+  display:flex;align-items:flex-end;justify-content:center;
+  /* slight bottom crop so feet "stand" on the stripe bottom */
+  overflow:visible;
 }
-.row-avatar img{width:70px;height:70px;object-fit:contain;display:block;}
+.row-avatar img{
+  width:78px;height:78px;object-fit:contain;display:block;
+  /* push avatar slightly down so it "sits" on the stripe */
+  margin-top:auto;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));
+}
 
 /* ── INFO ── */
 .row-info{display:flex;flex-direction:column;justify-content:center;gap:5px;flex:0 0 220px;min-width:0;}
@@ -480,11 +501,17 @@ function getTitle(pts){for(const[min,t]of TITLE_BY_PTS)if(pts>=min)return t;retu
 function getTitleIcon(t){return TITLE_ICONS[t]||"icons/other.svg";}
 
 // Inline SVG strings for the rank badges (so animation works cross-origin)
+// Each entry uses unique IDs (b1/a1, b2/a2 etc.) to avoid conflicts when multiple rows render
+function rankSvgForIndex(i){
+  // Use unique IDs per row to avoid SVG clipPath/id conflicts
+  const uid=`r${i}`;
+  if(i===0) return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none"><defs><g id="b${uid}" fill="#f0c863"><path d="M100 0h40L55 100H15zM70 0h15L0 100h-15z"/><animateTransform attributeName="transform" calcMode="spline" dur="2.2s" keySplines="0.9 0 0.1 1" keyTimes="0; 1" repeatCount="indefinite" type="translate" values="-150 0; 220 0"/></g></defs><path fill="#efba3c" stroke="#f0c863" stroke-width="3" d="M0 0h200l-35 100H0z"/><clipPath id="a${uid}"><path d="M0 0h200l-35 100H0z"/></clipPath><use clip-path="url(#a${uid})" href="#b${uid}"/></svg>`;
+  if(i===1) return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none"><defs><g id="b${uid}" fill="#a0b0b7"><path d="M100 0h40L55 100H15zM70 0h15L0 100h-15z"/><animateTransform attributeName="transform" calcMode="spline" dur="2.2s" keySplines="0.9 0 0.1 1" keyTimes="0; 1" repeatCount="indefinite" type="translate" values="-150 0; 220 0"/></g></defs><path fill="#879ea5" stroke="#a0b0b7" stroke-width="3" d="M0 0h200l-35 100H0z"/><clipPath id="a${uid}"><path d="M0 0h200l-35 100H0z"/></clipPath><use clip-path="url(#a${uid})" href="#b${uid}"/></svg>`;
+  if(i===2) return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none"><defs><g id="b${uid}" fill="#c58152"><path d="M100 0h40L55 100H15zM70 0h15L0 100h-15z"/><animateTransform attributeName="transform" calcMode="spline" dur="2.2s" keySplines="0.9 0 0.1 1" keyTimes="0; 1" repeatCount="indefinite" type="translate" values="-150 0; 220 0"/></g></defs><path fill="#b56329" stroke="#c58152" stroke-width="3" d="M0 0h200l-35 100H0z"/><clipPath id="a${uid}"><path d="M0 0h200l-35 100H0z"/></clipPath><use clip-path="url(#a${uid})" href="#b${uid}"/></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none"><path fill="#1a2030" stroke="#252d3d" stroke-width="3" d="M0 0h200l-35 100H0z"/></svg>`;
+}
 const RANK_SVG={
-  1:`<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" preserveAspectRatio="none"><defs><g id="b1" fill="#f0c863"><path d="M100 0h40L55 100H15zM70 0h15L0 100h-15z"/><animateTransform attributeName="transform" calcMode="spline" dur="2s" keySplines="0.9 0 0.1 1" keyTimes="0; 1" repeatCount="indefinite" type="translate" values="-150 0; 200 0"/></g></defs><path fill="#efba3c" stroke="#f0c863" stroke-width="4" d="M0 0h200l-35 100H0z"/><clipPath id="a1"><path d="M0 0h200l-35 100H0z"/></clipPath><use clip-path="url(#a1)" href="#b1"/></svg>`,
-  2:`<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" preserveAspectRatio="none"><defs><g id="b2" fill="#a0b0b7"><path d="M100 0h40L55 100H15zM70 0h15L0 100h-15z"/><animateTransform attributeName="transform" calcMode="spline" dur="2s" keySplines="0.9 0 0.1 1" keyTimes="0; 1" repeatCount="indefinite" type="translate" values="-150 0; 200 0"/></g></defs><path fill="#879ea5" stroke="#a0b0b7" stroke-width="4" d="M0 0h200l-35 100H0z"/><clipPath id="a2"><path d="M0 0h200l-35 100H0z"/></clipPath><use clip-path="url(#a2)" href="#b2"/></svg>`,
-  3:`<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" preserveAspectRatio="none"><defs><g id="b3" fill="#c58152"><path d="M100 0h40L55 100H15zM70 0h15L0 100h-15z"/><animateTransform attributeName="transform" calcMode="spline" dur="2s" keySplines="0.9 0 0.1 1" keyTimes="0; 1" repeatCount="indefinite" type="translate" values="-150 0; 200 0"/></g></defs><path fill="#b56329" stroke="#c58152" stroke-width="4" d="M0 0h200l-35 100H0z"/><clipPath id="a3"><path d="M0 0h200l-35 100H0z"/></clipPath><use clip-path="url(#a3)" href="#b3"/></svg>`,
-  other:`<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" preserveAspectRatio="none"><path fill="#1d2735" stroke="#28313f" stroke-width="4" d="M0 0h200l-35 100H0z"/></svg>`
+  1:``,2:``,3:``,other:``
 };
 
 let players={},currentMode="Overall",isOwner=false,sortedList=[];
@@ -541,7 +568,7 @@ window.render=function(){
   let html="";
   list.forEach((p,i)=>{
     const topCls=i===0?"top1":i===1?"top2":i===2?"top3":"";
-    const rankSvg=i===0?RANK_SVG[1]:i===1?RANK_SVG[2]:i===2?RANK_SVG[3]:RANK_SVG.other;
+    const rankSvg=rankSvgForIndex(i);
     const title=getTitle(p._pts);
     const titleIcon=getTitleIcon(title);
     let kitsToShow=currentMode==="Overall"?KITS.filter(k=>p.kits&&p.kits[k]):(p.kits&&p.kits[currentMode]?[currentMode]:[]);
@@ -552,13 +579,13 @@ window.render=function(){
     const regionHtml=p.region==="EU"?`<div class="row-region"><span class="region-pill">EU</span></div>`:`<div class="row-region"><span class="region-pill">EU</span></div>`;
 
     html+=`<div class="player-row ${topCls}${p.banned?" banned":""}" onclick="openProfile('${p.name.replace(/'/g,"\\'")}')">
-      <div class="row-rank">
+      <div class="row-rank-avatar">
         <div class="rank-svg-wrap">${rankSvg}</div>
-        <span class="rank-num">${i+1}</span>
-      </div>
-      <div class="row-avatar">
-        <img src="https://render.crafty.gg/3d/bust/${encodeURIComponent(p.name)}?overlay=true" alt="${p.name}" loading="lazy"
-          onerror="this.src='https://render.crafty.gg/3d/bust/MHF_Steve?overlay=true'">
+        <span class="rank-num">${i+1}.</span>
+        <div class="row-avatar">
+          <img src="https://render.crafty.gg/3d/bust/${encodeURIComponent(p.name)}?overlay=true" alt="${p.name}" loading="lazy"
+            onerror="this.src='https://render.crafty.gg/3d/bust/MHF_Steve?overlay=true'">
+        </div>
       </div>
       <div class="row-info">
         <div class="row-name${p.banned?" banned-name":""}">${p.name}${bannedHtml}</div>
