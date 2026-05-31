@@ -19,7 +19,7 @@
   --text2:#7070a0;
   --text3:#404060;
   --gold:#f0a520;
-  --nav-h:56px;
+  --nav-h:72px;
 }
 body{
   font-family:'Inter',sans-serif;
@@ -34,59 +34,59 @@ nav{
   position:fixed;top:14px;left:50%;transform:translateX(-50%);
   z-index:10000;height:var(--nav-h);
   display:grid;grid-template-columns:auto 1fr auto;align-items:center;
-  padding:0 20px;
+  padding:0 26px;
   background:#141418;
   border:1px solid #252530;
-  border-radius:14px;
-  width:calc(100% - 32px);max-width:1100px;
+  border-radius:16px;
+  width:calc(100% - 32px);max-width:1200px;
 }
 .nav-logo{
-  display:flex;align-items:center;gap:10px;text-decoration:none;padding-right:24px;
+  display:flex;align-items:center;gap:12px;text-decoration:none;padding-right:28px;
 }
-.nav-logo img{width:26px;height:26px;object-fit:contain;}
+.nav-logo img{width:34px;height:34px;object-fit:contain;}
 .nav-logo-text{
-  font-family:'Inter',sans-serif;font-size:.75rem;font-weight:900;
-  color:#fff;letter-spacing:4.5px;text-transform:uppercase;
-  text-shadow:0 0 10px rgba(255,255,255,.75),0 0 24px rgba(255,255,255,.35),0 0 48px rgba(255,255,255,.12);
+  font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:900;
+  color:#fff;letter-spacing:5px;text-transform:uppercase;
+  text-shadow:0 0 10px rgba(255,255,255,.8),0 0 26px rgba(255,255,255,.4),0 0 52px rgba(255,255,255,.15);
 }
-.nav-center{display:flex;align-items:center;justify-content:center;gap:2px;}
-.nav-right{display:flex;align-items:center;justify-content:flex-end;gap:8px;}
+.nav-center{display:flex;align-items:center;justify-content:center;gap:4px;}
+.nav-right{display:flex;align-items:center;justify-content:flex-end;gap:10px;}
 .nav-link{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:7px 15px;border-radius:8px;
-  font-size:11px;font-weight:600;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:10px;
+  font-size:12.5px;font-weight:600;
   color:#555575;
   cursor:pointer;transition:all .15s;
   border:1px solid transparent;background:transparent;text-decoration:none;
   letter-spacing:.8px;text-transform:uppercase;
 }
-.nav-link img{width:13px;height:13px;opacity:.55;flex-shrink:0;filter:brightness(0) invert(1);}
+.nav-link img{width:16px;height:16px;opacity:.55;flex-shrink:0;filter:brightness(0) invert(1);}
 .nav-link:hover{color:#9898c8;background:#1a1a24;}
 .btn-points{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:6px 13px;border-radius:8px;
-  font-size:11px;font-weight:600;color:#6060a0;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;border-radius:10px;
+  font-size:12px;font-weight:600;color:#6060a0;
   border:1px solid #202035;background:#0f0f1a;cursor:pointer;transition:all .15s;
   font-family:'Inter',sans-serif;letter-spacing:.3px;
 }
-.btn-points svg{width:11px;height:11px;color:#4848a8;}
+.btn-points svg{width:13px;height:13px;color:#4848a8;}
 .btn-points:hover{color:#9090d0;border-color:#303050;}
 .btn-login{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:7px 17px;border-radius:8px;
-  font-size:11px;font-weight:700;letter-spacing:.3px;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:10px;
+  font-size:12px;font-weight:700;letter-spacing:.3px;
   background:linear-gradient(135deg,#4a20c0,#6535e8);
   color:#fff;border:none;cursor:pointer;transition:all .15s;
   font-family:'Inter',sans-serif;
 }
 .btn-login:hover{background:linear-gradient(135deg,#5530d8,#7545f8);}
-.btn-login svg{width:11px;height:11px;}
+.btn-login svg{width:13px;height:13px;}
 .btn-login.logged-in{background:linear-gradient(135deg,#064e3b,#065f46);color:#34d399;}
 
 /* ── PAGE ── */
 .page-wrap{
-  padding-top:calc(var(--nav-h) + 36px);
-  max-width:1100px;margin:0 auto;
+  padding-top:calc(var(--nav-h) + 40px);
+  max-width:1200px;margin:0 auto;
   padding-left:16px;padding-right:16px;padding-bottom:4rem;
 }
 
@@ -94,25 +94,21 @@ nav{
 .tabs-card{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:14px;padding:8px;
-  display:flex;align-items:center;gap:2px;flex-wrap:wrap;
-  margin-bottom:10px;
+  border-radius:16px;padding:10px;
+  display:flex;align-items:center;gap:3px;flex-wrap:wrap;
+  margin-bottom:12px;
 }
 .tab-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:9px 18px;border-radius:10px;
-  font-size:13px;font-weight:600;color:var(--text2);
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 22px;border-radius:12px;
+  font-size:14px;font-weight:600;color:var(--text2);
   cursor:pointer;transition:all .15s;
   border:1px solid transparent;background:transparent;white-space:nowrap;
   font-family:'Inter',sans-serif;
 }
 .tab-btn:hover{color:#9090c0;background:#18181f;}
-.tab-btn.active{
-  background:#1c1c28;
-  border-color:#2e2e42;
-  color:#c8c8e8;
-}
-.tab-btn img{width:18px;height:18px;object-fit:contain;flex-shrink:0;}
+.tab-btn.active{background:#1c1c28;border-color:#2e2e42;color:#c8c8e8;}
+.tab-btn img{width:22px;height:22px;object-fit:contain;flex-shrink:0;}
 .tab-btn.overall-tab.active{
   background:rgba(240,165,32,.13);
   border-color:rgba(240,165,32,.4);
@@ -120,87 +116,103 @@ nav{
 }
 
 /* ── SEARCH ── */
-.search-wrap{position:relative;margin-bottom:8px;}
+.search-wrap{position:relative;margin-bottom:10px;}
 .search-wrap svg{
-  position:absolute;left:16px;top:50%;transform:translateY(-50%);
-  width:13px;height:13px;color:var(--text3);pointer-events:none;
+  position:absolute;left:20px;top:50%;transform:translateY(-50%);
+  width:16px;height:16px;color:var(--text3);pointer-events:none;
 }
 #search{
-  width:100%;padding:14px 14px 14px 44px;
-  background:var(--card);border:1px solid var(--border);border-radius:12px;
-  color:var(--text);font-size:13px;font-family:'Inter',sans-serif;
+  width:100%;padding:18px 18px 18px 52px;
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  color:var(--text);font-size:15px;font-family:'Inter',sans-serif;
   outline:none;transition:border .2s;
 }
 #search:focus{border-color:#38385a;}
 #search::placeholder{color:var(--text3);}
 
 /* ── PLAYER ROWS ── */
+/* Target: 6 rows visible on screen. Row height ~105px, nav+tabs+search ≈260px, so 6×105=630 fits in ~890px viewport */
 .player-row{
   display:flex;align-items:center;
-  border-radius:11px;margin-bottom:4px;
+  border-radius:12px;margin-bottom:5px;
   cursor:pointer;overflow:hidden;
   border:1px solid var(--border);
   background:var(--card);
-  min-height:74px;
+  min-height:106px;
   transition:border-color .15s,background .15s;
 }
 .player-row:hover{border-color:var(--border2);background:var(--card2);}
 .player-row.banned{opacity:.4;}
 
-/* ── RANK COLUMN ── */
+/* ── RANK COLUMN — full height colored block like screenshot ── */
 .row-rank{
-  width:72px;min-width:72px;align-self:stretch;
+  /* wide enough to show the full shimmer graphic */
+  width:110px;min-width:110px;align-self:stretch;
   display:flex;align-items:center;justify-content:center;
-  font-family:'Inter',sans-serif;font-size:20px;font-weight:800;
+  font-family:'Inter',sans-serif;font-size:22px;font-weight:800;
   color:#303050;flex-shrink:0;position:relative;overflow:hidden;
+  /* default: dark grey for ranks 4+ */
+  background:linear-gradient(135deg,#1a1a24 0%,#141420 100%);
 }
 
-/* TOP 1 — gold with shimmer icon */
+/* shimmer image fills the whole rank block */
+.shimmer-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;pointer-events:none;
+}
+
+/* TOP 1 — gold */
 .player-row.top1 .row-rank{
-  background:linear-gradient(180deg,#b87a0a 0%,#8a5500 100%);
-  color:#ffeebb;font-size:26px;
+  background:linear-gradient(180deg,#c08010 0%,#8a5500 100%);
+  color:#ffeebb;font-size:30px;
 }
-.player-row.top1 .row-rank .shimmer-img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;pointer-events:none;
-}
+.player-row.top1 .row-rank .shimmer-img{opacity:.55;}
 
-/* TOP 2 — silver with shimmer icon */
+/* TOP 2 — silver */
 .player-row.top2 .row-rank{
-  background:linear-gradient(180deg,#5a6270 0%,#3e4450 100%);
-  color:#d8e0ec;font-size:26px;
+  background:linear-gradient(180deg,#606e80 0%,#40505e 100%);
+  color:#d8e8f8;font-size:30px;
 }
-.player-row.top2 .row-rank .shimmer-img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;pointer-events:none;
-}
+.player-row.top2 .row-rank .shimmer-img{opacity:.5;}
 
-/* TOP 3 — bronze with shimmer icon */
+/* TOP 3 — bronze */
 .player-row.top3 .row-rank{
-  background:linear-gradient(180deg,#8a4e18 0%,#6a3a0e 100%);
-  color:#f8d8b0;font-size:26px;
+  background:linear-gradient(180deg,#9a5a20 0%,#6a3c0e 100%);
+  color:#fcd8a8;font-size:30px;
 }
-.player-row.top3 .row-rank .shimmer-img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;pointer-events:none;
+.player-row.top3 .row-rank .shimmer-img{opacity:.5;}
+
+/* ranks 4+ — dark, no shimmer */
+.player-row:not(.top1):not(.top2):not(.top3) .row-rank{
+  background:linear-gradient(135deg,#1c1c26 0%,#161620 100%);
+  color:#44445a;font-size:22px;
 }
 
 .rank-num{position:relative;z-index:1;}
 
-.player-row.top1{border-color:rgba(184,148,42,.32);}
-.player-row.top2{border-color:rgba(140,160,190,.2);}
-.player-row.top3{border-color:rgba(180,110,60,.25);}
+.player-row.top1{border-color:rgba(200,160,40,.35);}
+.player-row.top2{border-color:rgba(140,160,195,.22);}
+.player-row.top3{border-color:rgba(190,120,60,.28);}
 
-/* ── AVATAR ── */
+/* ── AVATAR — no border/radius, seamless ── */
 .row-avatar{
-  width:46px;height:46px;border-radius:8px;overflow:hidden;
-  background:#1e1e2c;flex-shrink:0;margin:0 14px 0 8px;
+  width:68px;height:68px;
+  flex-shrink:0;margin:0 18px 0 16px;
+  /* no border-radius, no overflow — skin shows cleanly */
+  display:flex;align-items:center;justify-content:center;
 }
-.row-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+.row-avatar img{
+  width:68px;height:68px;
+  object-fit:contain;display:block;
+  /* no border-radius */
+}
 
 /* ── INFO ── */
-.row-info{display:flex;flex-direction:column;gap:3px;flex:0 0 210px;min-width:0;}
+.row-info{display:flex;flex-direction:column;gap:4px;flex:0 0 230px;min-width:0;}
 .row-name{
-  font-weight:700;font-size:14.5px;color:var(--text);
+  font-weight:700;font-size:16px;color:var(--text);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  display:flex;align-items:center;gap:6px;
+  display:flex;align-items:center;gap:7px;
 }
 .row-name.banned-name{color:#ff7777;}
 .banned-tag{
@@ -209,47 +221,53 @@ nav{
   padding:1px 6px;border-radius:4px;flex-shrink:0;
 }
 .row-sub{
-  font-size:11.5px;color:var(--text2);
-  display:flex;align-items:center;gap:5px;
+  font-size:12px;color:var(--text2);
+  display:flex;align-items:center;gap:6px;
 }
-.row-sub img{width:14px;height:14px;flex-shrink:0;object-fit:contain;}
+.row-sub img{width:15px;height:15px;flex-shrink:0;object-fit:contain;}
 
-/* ── REGION ── */
+/* ── REGION — EU in green pill, unknown as green EU icon ── */
 .row-region{
-  flex-shrink:0;padding:4px 10px;border-radius:20px;
-  font-size:10px;font-weight:800;letter-spacing:.5px;
-  margin:0 16px 0 auto;
+  flex-shrink:0;
+  margin:0 18px 0 auto;
+  display:flex;align-items:center;justify-content:center;
 }
-.row-region.eu{
+/* EU pill — green */
+.region-pill{
+  padding:5px 12px;border-radius:20px;
+  font-size:11px;font-weight:800;letter-spacing:.5px;
   background:#082014;border:1px solid #155a30;color:#35d870;
 }
-.row-region.unknown{
-  background:#131320;border:1px solid var(--border);
-  color:var(--text3);font-size:11.5px;letter-spacing:0;
+/* Unknown → show a green EU-style globe icon */
+.region-unknown-icon{
+  width:30px;height:30px;
+  background:#0d2010;border:1px solid #1a4428;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
 }
+.region-unknown-icon svg{width:16px;height:16px;color:#35d870;}
 
-/* ── KIT BADGES — NO BORDER, NO BG ── */
+/* ── KIT BADGES — bigger icons, no border/bg ── */
 .row-kits{
-  display:flex;align-items:center;gap:5px;
-  flex-wrap:wrap;padding:0 16px 0 0;
+  display:flex;align-items:center;gap:8px;
+  flex-wrap:wrap;padding:0 20px 0 0;
   justify-content:flex-end;
 }
 .kit-badge{
-  display:inline-flex;flex-direction:column;align-items:center;gap:2px;
-  padding:4px 5px 3px;border-radius:0;
+  display:inline-flex;flex-direction:column;align-items:center;gap:3px;
   border:none;background:transparent;
-  transition:transform .12s;cursor:default;min-width:28px;
+  transition:transform .12s;cursor:default;min-width:36px;
 }
 .kit-badge:hover{transform:translateY(-2px);}
-.kit-badge-icon{width:16px;height:16px;display:flex;align-items:center;justify-content:center;}
-.kit-badge-icon img{width:16px;height:16px;object-fit:contain;}
+.kit-badge-icon{width:26px;height:26px;display:flex;align-items:center;justify-content:center;}
+.kit-badge-icon img{width:26px;height:26px;object-fit:contain;}
 .kit-badge-tier{
-  font-family:'Inter',sans-serif;font-size:9.5px;font-weight:800;
+  font-family:'Inter',sans-serif;font-size:11px;font-weight:800;
   letter-spacing:.1px;line-height:1;text-align:center;
 }
 .kit-badge.is-retired{opacity:.4;}
 
-/* tier colors — no border/bg on row badges */
+/* tier colors */
 .tier-ht1 .kit-badge-tier,.tier-ht1 .profile-kit-tier{color:#e8ba3a;}
 .tier-lt1 .kit-badge-tier,.tier-lt1 .profile-kit-tier{color:#d5b355;}
 .tier-ht2 .kit-badge-tier,.tier-ht2 .profile-kit-tier{color:#c4d3e7;}
@@ -261,7 +279,7 @@ nav{
 .tier-ht5 .kit-badge-tier,.tier-ht5 .profile-kit-tier{color:#8f82a8;}
 .tier-lt5 .kit-badge-tier,.tier-lt5 .profile-kit-tier{color:#655b79;}
 
-/* profile badges keep styling */
+/* profile badges keep border/bg */
 .profile-kit-badge.tier-ht1{border-color:rgba(232,186,58,.5)!important;background:rgba(232,186,58,.08)!important;}
 .profile-kit-badge.tier-lt1{border-color:rgba(213,179,85,.45)!important;background:rgba(213,179,85,.08)!important;}
 .profile-kit-badge.tier-ht2{border-color:rgba(196,211,231,.35)!important;background:rgba(196,211,231,.06)!important;}
@@ -275,8 +293,8 @@ nav{
 
 /* ── EMPTY ── */
 .empty-state{text-align:center;padding:5rem 2rem;color:var(--text3);}
-.empty-state svg{width:36px;height:36px;margin:0 auto 1rem;opacity:.12;display:block;}
-.empty-state h3{font-size:15px;color:var(--text2);margin-bottom:.4rem;}
+.empty-state svg{width:40px;height:40px;margin:0 auto 1rem;opacity:.12;display:block;}
+.empty-state h3{font-size:16px;color:var(--text2);margin-bottom:.4rem;}
 
 /* ── MODALS ── */
 .modal-backdrop{
@@ -360,9 +378,9 @@ nav{
   display:flex;align-items:center;justify-content:center;
   font-family:'Inter',sans-serif;font-size:17px;font-weight:800;flex-shrink:0;
 }
-.pos-rank-block.gold{background:linear-gradient(135deg,#b87a0a,#8a5500);color:#ffeebb;}
-.pos-rank-block.silver{background:linear-gradient(135deg,#5a6270,#3e4450);color:#d8e0ec;}
-.pos-rank-block.bronze{background:linear-gradient(135deg,#8a4e18,#6a3a0e);color:#f8d8b0;}
+.pos-rank-block.gold{background:linear-gradient(135deg,#c08010,#8a5500);color:#ffeebb;}
+.pos-rank-block.silver{background:linear-gradient(135deg,#606e80,#40505e);color:#d8e8f8;}
+.pos-rank-block.bronze{background:linear-gradient(135deg,#9a5a20,#6a3c0e);color:#fcd8a8;}
 .pos-rank-block.default{background:#1a1a28;border:1px solid var(--border);color:var(--text2);}
 .pos-info{display:flex;align-items:center;gap:7px;}
 .pos-trophy{width:17px;height:17px;color:var(--gold);flex-shrink:0;}
@@ -387,28 +405,14 @@ nav{
   width:540px;max-width:96vw;max-height:90vh;overflow-y:auto;
   padding:1.75rem;position:relative;
 }
-.modal-title{
-  font-family:'Inter',sans-serif;font-size:1.2rem;font-weight:800;
-  background:linear-gradient(135deg,#5030c8,#b030a0);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin-bottom:.2rem;
-}
+.modal-title{font-family:'Inter',sans-serif;font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#5030c8,#b030a0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.2rem;}
 .modal-sub{color:var(--text3);font-size:11.5px;margin-bottom:1.25rem;}
-.modal-close{
-  position:absolute;top:.9rem;right:.9rem;
-  background:#1c1c28;border:1px solid var(--border);
-  color:var(--text2);border-radius:7px;padding:3px 9px;
-  cursor:pointer;font-size:11.5px;transition:all .2s;font-family:'Inter',sans-serif;
-}
+.modal-close{position:absolute;top:.9rem;right:.9rem;background:#1c1c28;border:1px solid var(--border);color:var(--text2);border-radius:7px;padding:3px 9px;cursor:pointer;font-size:11.5px;transition:all .2s;font-family:'Inter',sans-serif;}
 .modal-close:hover{color:var(--text);}
 .modal hr{border:none;border-top:1px solid var(--border);margin:1.1rem 0;}
 .modal h3{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.6rem;}
 .form-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:.6rem;}
-.form-row input,.form-row select,.modal input[type=email],.modal input[type=password]{
-  flex:1;min-width:90px;background:#141420;border:1px solid var(--border);
-  color:var(--text);padding:9px 11px;border-radius:9px;
-  font-size:12.5px;font-family:'Inter',sans-serif;outline:none;transition:border .2s;
-}
+.form-row input,.form-row select,.modal input[type=email],.modal input[type=password]{flex:1;min-width:90px;background:#141420;border:1px solid var(--border);color:var(--text);padding:9px 11px;border-radius:9px;font-size:12.5px;font-family:'Inter',sans-serif;outline:none;transition:border .2s;}
 .form-row input:focus,.form-row select:focus{border-color:#4030a0;}
 .form-row select option{background:#111116;}
 .btn{padding:9px 18px;border:none;border-radius:9px;font-weight:700;font-size:12.5px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .18s;}
@@ -435,12 +439,12 @@ nav{
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:#252535;border-radius:99px;}
-@media(max-width:768px){
-  nav{width:calc(100% - 20px);padding:0 12px;}
+@media(max-width:900px){
+  nav{width:calc(100% - 20px);padding:0 16px;}
   .page-wrap{padding-left:10px;padding-right:10px;}
-  .row-info{flex:0 0 130px;}
+  .row-info{flex:0 0 150px;}
 }
-@media(max-width:560px){
+@media(max-width:600px){
   .nav-center .nav-link span{display:none;}
   .row-region{display:none;}
 }
@@ -486,8 +490,7 @@ nav{
   <!-- TABS -->
   <div class="tabs-card">
     <div class="tab-btn overall-tab active" onclick="switchMode('Overall',this)">
-      <img src="icons/overall.svg" onerror="this.style.display='none'">
-      Overall
+      <img src="icons/overall.svg" onerror="this.style.display='none'">Overall
     </div>
     <div class="tab-btn" onclick="switchMode('NetheriteOP',this)"><img src="icons/nethop.svg" onerror="this.style.display='none'">Nethpot</div>
     <div class="tab-btn" onclick="switchMode('SMP',this)"><img src="icons/smp.svg" onerror="this.style.display='none'">Smp</div>
@@ -518,7 +521,7 @@ nav{
       </div>
       <div class="profile-name" id="prof-name"></div>
       <div class="profile-title-badge">
-        <img id="prof-title-icon" src="" alt="" style="width:18px;height:18px;object-fit:contain;">
+        <img id="prof-title-icon" src="" alt="">
         <span id="prof-title-text"></span>
       </div>
       <div class="profile-region" id="prof-region"></div>
@@ -634,7 +637,7 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from
 
 const firebaseConfig={apiKey:"AIzaSyDrlGkH0_qb5-aqgAr5SURzBXs7JCSvw58",authDomain:"legitiers.firebaseapp.com",databaseURL:"https://legitiers-default-rtdb.europe-west1.firebasedatabase.app",projectId:"legitiers",storageBucket:"legitiers.firebasestorage.app",messagingSenderId:"459932032482",appId:"1:459932032482:web:a329dbf9fbe715cfe82dbb"};
 const ADMIN_UIDS=["KGq9EmO3VkPCI8r97pPz2TkL0mk1"];
-const app=initializeApp(firebaseConfig), db=getDatabase(app), auth=getAuth(app);
+const app=initializeApp(firebaseConfig),db=getDatabase(app),auth=getAuth(app);
 
 const KITS=["Sword","Axe","Mace","Crystal","UHC","Pot","SMP","NetheriteOP"];
 const POINTS={HT1:60,LT1:45,HT2:30,LT2:20,HT3:10,LT3:6,HT4:4,LT4:3,HT5:2,LT5:1};
@@ -644,23 +647,15 @@ const KIT_ICONS={
   UHC:"icons/uhc.svg",Pot:"icons/pot.svg",SMP:"icons/smp.svg",NetheriteOP:"icons/nethop.svg"
 };
 const TIER_COLORS={HT1:"#e8ba3a",LT1:"#d5b355",HT2:"#c4d3e7",LT2:"#a0a7b2",HT3:"#F89F5A",LT3:"#C67B42",HT4:"#81749a",LT4:"#655b79",HT5:"#8f82a8",LT5:"#655b79"};
-
 const TITLE_BY_PTS=[[200,"Legendary"],[120,"Grand Master"],[80,"Master"],[30,"Combat Ace"],[10,"Combat Specialist"],[5,"Combat Cadet"],[1,"Combat Novice"],[0,"Rookie"]];
-const TITLE_ICONS={
-  "Legendary":"icons/combat_grandmaster.webp",
-  "Grand Master":"icons/combat_grandmaster.webp",
-  "Master":"icons/combat_master.webp",
-  "Combat Ace":"icons/combat_ace.svg",
-  "Combat Specialist":"icons/combat_specialist.svg",
-  "Combat Cadet":"icons/combat_cadet.svg",
-  "Combat Novice":"icons/combat_novice.svg",
-  "Rookie":"icons/rookie.svg",
-  "Player":"icons/other.svg"
-};
+const TITLE_ICONS={"Legendary":"icons/combat_grandmaster.webp","Grand Master":"icons/combat_grandmaster.webp","Master":"icons/combat_master.webp","Combat Ace":"icons/combat_ace.svg","Combat Specialist":"icons/combat_specialist.svg","Combat Cadet":"icons/combat_cadet.svg","Combat Novice":"icons/combat_novice.svg","Rookie":"icons/rookie.svg"};
 function getTitle(pts){for(const[min,t]of TITLE_BY_PTS)if(pts>=min)return t;return"Rookie";}
-function getTitleIcon(title){return TITLE_ICONS[title]||"icons/other.svg";}
+function getTitleIcon(t){return TITLE_ICONS[t]||"icons/other.svg";}
 
-let players={}, currentMode="Overall", isOwner=false, sortedList=[];
+// Globe icon SVG for unknown region
+const GLOBE_SVG=`<div class="region-unknown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>`;
+
+let players={},currentMode="Overall",isOwner=false,sortedList=[];
 
 onAuthStateChanged(auth,user=>{
   isOwner=user&&ADMIN_UIDS.includes(user.uid);
@@ -676,9 +671,8 @@ onValue(ref(db,"players"),snap=>{
 });
 
 function dbKey(n){return n.toLowerCase().replace(/[.#$/[\]]/g,"_");}
-async function dbSave(p){if(!isOwner){showMsg("❌ Not authorized","err");throw new Error("Not authorized");}await set(ref(db,"players/"+dbKey(p.name)),p);}
+async function dbSave(p){if(!isOwner){showMsg("❌ Not authorized","err");throw new Error();}await set(ref(db,"players/"+dbKey(p.name)),p);}
 async function dbDel(n){if(!isOwner){showMsg("❌ Not authorized","err");return;}await remove(ref(db,"players/"+dbKey(n)));}
-
 function calcPts(p){let t=0;for(let k in p.kits)if(!(p.retired&&p.retired[k]))t+=POINTS[p.kits[k]]||0;return t;}
 
 function kitBadgeHTML(k,tier,retired,large=false){
@@ -687,12 +681,12 @@ function kitBadgeHTML(k,tier,retired,large=false){
   if(large){
     return`<div class="profile-kit-badge ${tc}${retired?" is-retired":""}" title="${k} – ${tier}: ${POINTS[tier]||0} pts">
       <img src="${KIT_ICONS[k]||""}" style="width:20px;height:20px;object-fit:contain;" onerror="this.style.display='none'">
-      <div class="profile-kit-tier" style="color:${color}">${tier}${retired?`<span style="color:#38bdf8;font-size:7px;display:block">R</span>`:""}</div>
+      <div class="profile-kit-tier" style="color:${color}">${tier}</div>
     </div>`;
   }
   return`<div class="kit-badge ${tc}${retired?" is-retired":""}" title="${k} – ${tier}: ${POINTS[tier]||0} pts">
-    <div class="kit-badge-icon"><img src="${KIT_ICONS[k]||""}" style="width:16px;height:16px;object-fit:contain;" onerror="this.style.display='none'"></div>
-    <div class="kit-badge-tier" style="color:${color}">${tier}${retired?`<span style="color:#38bdf8;font-size:7px;display:block">R</span>`:""}</div>
+    <div class="kit-badge-icon"><img src="${KIT_ICONS[k]||""}" onerror="this.style.display='none'"></div>
+    <div class="kit-badge-tier" style="color:${color}">${tier}</div>
   </div>`;
 }
 
@@ -721,14 +715,18 @@ window.render=function(){
     let kitsToShow=currentMode==="Overall"?KITS.filter(k=>p.kits&&p.kits[k]):(p.kits&&p.kits[currentMode]?[currentMode]:[]);
     kitsToShow.sort((a,b)=>TIER_ORDER.indexOf(p.kits[a])-TIER_ORDER.indexOf(p.kits[b]));
     const kitBadges=kitsToShow.map(k=>kitBadgeHTML(k,p.kits[k],p.retired&&p.retired[k])).join("");
-    const regionClass=p.region==="EU"?"eu":"unknown";
 
-    // shimmer image for top 3
+    // shimmer for top3
     const shimmerNum=i===0?"1":i===1?"2":i===2?"3":"";
-    const shimmerHtml=shimmerNum?`<img class="shimmer-img" src="icons/${shimmerNum}-shimmer.svg" alt="">`:""
+    const shimmer=shimmerNum?`<img class="shimmer-img" src="icons/${shimmerNum}-shimmer.svg" alt="">`:"";
+
+    // region: EU = green pill, else green globe
+    const regionHtml=p.region==="EU"
+      ?`<div class="row-region"><span class="region-pill">EU</span></div>`
+      :`<div class="row-region">${GLOBE_SVG}</div>`;
 
     html+=`<div class="player-row ${topCls}${p.banned?" banned":""}" onclick="openProfile('${p.name.replace(/'/g,"\\'")}')">
-      <div class="row-rank">${shimmerHtml}<span class="rank-num">${i+1}</span></div>
+      <div class="row-rank">${shimmer}<span class="rank-num">${i+1}</span></div>
       <div class="row-avatar">
         <img src="https://render.crafty.gg/3d/bust/${encodeURIComponent(p.name)}?overlay=true" alt="${p.name}" loading="lazy"
           onerror="this.src='https://render.crafty.gg/3d/bust/MHF_Steve?overlay=true'">
@@ -740,7 +738,7 @@ window.render=function(){
           <span>${title}&nbsp;(${p._pts} points)</span>
         </div>
       </div>
-      <div class="row-region ${regionClass}">${p.region||"??"}</div>
+      ${regionHtml}
       <div class="row-kits">${kitBadges}</div>
     </div>`;
   });
@@ -748,11 +746,10 @@ window.render=function(){
 };
 
 window.openProfile=function(name){
-  const p=players[name]; if(!p)return;
+  const p=players[name];if(!p)return;
   p._pts=calcPts(p);
   const rank=sortedList.findIndex(x=>x.name===name)+1;
   const title=getTitle(p._pts);
-  const titleIcon=getTitleIcon(title);
   const rankClass=rank===1?"gold":rank===2?"silver":rank===3?"bronze":"default";
   const wrap=document.getElementById("prof-avatar-wrap");
   wrap.className="profile-avatar-wrap "+rankClass;
@@ -760,20 +757,14 @@ window.openProfile=function(name){
   document.getElementById("prof-avatar").onerror=function(){this.src="https://render.crafty.gg/3d/bust/MHF_Steve?overlay=true";};
   document.getElementById("prof-name").textContent=name;
   document.getElementById("prof-title-text").textContent=title;
-  document.getElementById("prof-title-icon").src=titleIcon;
+  document.getElementById("prof-title-icon").src=getTitleIcon(title);
   document.getElementById("prof-region").textContent=p.region||"??";
   document.getElementById("prof-namemc").href=`https://namemc.com/profile/${encodeURIComponent(name)}`;
   const dcCard=document.getElementById("prof-discord-card");
-  if(p.discord){
-    dcCard.style.display="flex";
-    document.getElementById("prof-discord-img").src=p.discord.avatar||"";
-    document.getElementById("prof-discord-name").textContent=p.discord.name||name;
-    document.getElementById("prof-discord-tag").textContent=p.discord.tag||"";
-    document.getElementById("prof-discord-btn").onclick=()=>{if(p.discord.url)window.open(p.discord.url,"_blank");};
-  } else { dcCard.style.display="none"; }
+  if(p.discord){dcCard.style.display="flex";document.getElementById("prof-discord-img").src=p.discord.avatar||"";document.getElementById("prof-discord-name").textContent=p.discord.name||name;document.getElementById("prof-discord-tag").textContent=p.discord.tag||"";document.getElementById("prof-discord-btn").onclick=()=>{if(p.discord.url)window.open(p.discord.url,"_blank");};}
+  else{dcCard.style.display="none";}
   const rb=document.getElementById("prof-rank-block");
-  rb.className="pos-rank-block "+rankClass;
-  rb.textContent=rank+".";
+  rb.className="pos-rank-block "+rankClass;rb.textContent=rank+".";
   document.getElementById("prof-pos-label").textContent="OVERALL";
   document.getElementById("prof-pos-pts").textContent=`(${p._pts} points)`;
   let kitsToShow=KITS.filter(k=>p.kits&&p.kits[k]);
@@ -782,70 +773,49 @@ window.openProfile=function(name){
   document.getElementById("profileBackdrop").classList.add("open");
 };
 
-window.switchMode=function(mode,el){
-  currentMode=mode;
-  document.querySelectorAll(".tab-btn").forEach(t=>t.classList.remove("active"));
-  el.classList.add("active");render();
-};
+window.switchMode=function(mode,el){currentMode=mode;document.querySelectorAll(".tab-btn").forEach(t=>t.classList.remove("active"));el.classList.add("active");render();};
 window.openOwnerLogin=function(){
   if(isOwner){document.getElementById("ownerBackdrop").classList.add("open");refreshDropdowns();return;}
   document.getElementById("loginBackdrop").classList.add("open");
-  document.getElementById("loginEmail").value="";document.getElementById("loginPw").value="";
-  document.getElementById("loginErr").textContent="";
+  document.getElementById("loginEmail").value="";document.getElementById("loginPw").value="";document.getElementById("loginErr").textContent="";
   setTimeout(()=>document.getElementById("loginEmail").focus(),80);
 };
 window.doLogin=async function(){
   const email=document.getElementById("loginEmail").value.trim(),pw=document.getElementById("loginPw").value;
   const errEl=document.getElementById("loginErr");errEl.textContent="";
-  try{
-    const uc=await signInWithEmailAndPassword(auth,email,pw);
-    if(!ADMIN_UIDS.includes(uc.user.uid)){await signOut(auth);errEl.textContent="❌ No admin access.";return;}
-    document.getElementById("loginBackdrop").classList.remove("open");
-    refreshDropdowns();document.getElementById("ownerBackdrop").classList.add("open");
-  }catch(e){errEl.textContent="❌ "+(e.code==="auth/invalid-credential"?"Wrong email or password.":e.message);}
+  try{const uc=await signInWithEmailAndPassword(auth,email,pw);if(!ADMIN_UIDS.includes(uc.user.uid)){await signOut(auth);errEl.textContent="❌ No admin access.";return;}document.getElementById("loginBackdrop").classList.remove("open");refreshDropdowns();document.getElementById("ownerBackdrop").classList.add("open");}
+  catch(e){errEl.textContent="❌ "+(e.code==="auth/invalid-credential"?"Wrong email or password.":e.message);}
 };
 window.doLogout=async function(){await signOut(auth);document.getElementById("ownerBackdrop").classList.remove("open");};
 window.bgClose=function(id,e){if(e.target===document.getElementById(id))document.getElementById(id).classList.remove("open");};
 function showMsg(t,tp){const el=document.getElementById("panelMsg");el.className="msg "+tp;el.textContent=t;setTimeout(()=>{el.className="msg";el.textContent="";},3500);}
 function normName(n){return n.charAt(0).toUpperCase()+n.slice(1);}
 window.addTier=async function(){
-  let name=document.getElementById("f-name").value.trim();
-  const kit=document.getElementById("f-kit").value,tier=document.getElementById("f-tier").value;
-  if(!name){showMsg("❌ Enter a player name","err");return;}
-  name=normName(name);
-  const existing=Object.keys(players).find(k=>k.toLowerCase()===name.toLowerCase());
-  const key=existing||name;
+  let name=document.getElementById("f-name").value.trim();const kit=document.getElementById("f-kit").value,tier=document.getElementById("f-tier").value;
+  if(!name){showMsg("❌ Enter a player name","err");return;}name=normName(name);
+  const existing=Object.keys(players).find(k=>k.toLowerCase()===name.toLowerCase());const key=existing||name;
   if(!players[key])players[key]={name:key,kits:{},retired:{},banned:false};
-  players[key].kits[kit]=tier;
-  showMsg("⏳ Saving...","ok");await dbSave(players[key]);showMsg(`✅ ${key} → ${kit} ${tier}`,"ok");
+  players[key].kits[kit]=tier;showMsg("⏳ Saving...","ok");await dbSave(players[key]);showMsg(`✅ ${key} → ${kit} ${tier}`,"ok");
 };
 window.removeTier=async function(){
   const name=document.getElementById("r-player").value,kit=document.getElementById("r-kit").value;
-  if(!name){showMsg("❌ Select a player","err");return;}
-  if(!players[name]?.kits[kit]){showMsg("❌ No tier found","err");return;}
+  if(!name){showMsg("❌ Select a player","err");return;}if(!players[name]?.kits[kit]){showMsg("❌ No tier found","err");return;}
   delete players[name].kits[kit];if(players[name].retired)delete players[name].retired[kit];
-  if(Object.keys(players[name].kits).length===0){await dbDel(name);}else{await dbSave(players[name]);}
-  showMsg(`✅ Removed ${kit} from ${name}`,"ok");
+  if(Object.keys(players[name].kits).length===0){await dbDel(name);}else{await dbSave(players[name]);}showMsg(`✅ Removed ${kit} from ${name}`,"ok");
 };
 window.toggleRetire=async function(){
   const name=document.getElementById("ret-player").value,kit=document.getElementById("ret-kit").value;
-  if(!name||!players[name]){showMsg("❌ Select a player","err");return;}
-  if(!players[name].kits[kit]){showMsg("❌ No tier in this kit","err");return;}
-  if(!players[name].retired)players[name].retired={};
-  players[name].retired[kit]=!players[name].retired[kit];
+  if(!name||!players[name]){showMsg("❌ Select a player","err");return;}if(!players[name].kits[kit]){showMsg("❌ No tier in this kit","err");return;}
+  if(!players[name].retired)players[name].retired={};players[name].retired[kit]=!players[name].retired[kit];
   await dbSave(players[name]);showMsg(`✅ ${name} ${kit} → ${players[name].retired[kit]?"Retired":"Active"}`,"ok");
 };
 window.toggleBan=async function(){
-  const name=document.getElementById("ban-player").value;
-  if(!name||!players[name]){showMsg("❌ Select a player","err");return;}
-  players[name].banned=!players[name].banned;
-  await dbSave(players[name]);showMsg(`✅ ${name} → ${players[name].banned?"Banned":"Unbanned"}`,"ok");
+  const name=document.getElementById("ban-player").value;if(!name||!players[name]){showMsg("❌ Select a player","err");return;}
+  players[name].banned=!players[name].banned;await dbSave(players[name]);showMsg(`✅ ${name} → ${players[name].banned?"Banned":"Unbanned"}`,"ok");
 };
 window.resetAll=async function(){
-  if(!confirm("Delete ALL data? Cannot be undone!"))return;
-  if(!confirm("Really sure?"))return;
-  for(const name of Object.keys(players))await dbDel(name);
-  showMsg("✅ All data cleared","ok");
+  if(!confirm("Delete ALL data? Cannot be undone!"))return;if(!confirm("Really sure?"))return;
+  for(const name of Object.keys(players))await dbDel(name);showMsg("✅ All data cleared","ok");
 };
 function refreshDropdowns(){
   const names=Object.keys(players);
