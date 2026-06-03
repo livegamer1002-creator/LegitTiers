@@ -15,7 +15,7 @@
 }
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;height:var(--nav-h);display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:0 26px;background:#141418;border:3px solid #2a2a38;border-radius:16px;width:calc(100% - 32px);max-width:1200px;}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;padding-right:28px;}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;padding-right:28px;cursor:pointer;}
 .nav-logo img{width:34px;height:34px;object-fit:contain;}
 .nav-logo-text{font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:900;color:#fff;letter-spacing:5px;text-transform:uppercase;text-shadow:0 0 10px rgba(255,255,255,.8),0 0 26px rgba(255,255,255,.4),0 0 52px rgba(255,255,255,.15);}
 .nav-center{display:flex;align-items:center;justify-content:center;gap:4px;}
@@ -26,10 +26,12 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;he
 .btn-points{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;font-size:12px;font-weight:600;color:#6060a0;border:1px solid #202035;background:#0f0f1a;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;}
 .btn-points svg{width:13px;height:13px;color:#4848a8;}
 .btn-points:hover{color:#9090d0;border-color:#303050;}
-.btn-login{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:10px;font-size:12px;font-weight:700;background:linear-gradient(135deg,#4a20c0,#6535e8);color:#fff;border:none;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;}
-.btn-login:hover{background:linear-gradient(135deg,#5530d8,#7545f8);}
-.btn-login svg{width:13px;height:13px;}
-.btn-login.logged-in{background:linear-gradient(135deg,#064e3b,#065f46);color:#34d399;}
+/* Login button completely hidden - access via logo clicks */
+.btn-login-hidden{display:none!important;}
+/* Owner panel button only shown when logged in */
+.btn-owner-panel{display:none;align-items:center;gap:8px;padding:10px 22px;border-radius:10px;font-size:12px;font-weight:700;background:linear-gradient(135deg,#064e3b,#065f46);color:#34d399;border:none;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;}
+.btn-owner-panel.visible{display:inline-flex;}
+.btn-owner-panel svg{width:13px;height:13px;}
 .page-wrap{padding-top:calc(var(--nav-h) + 40px);max-width:1200px;margin:0 auto;padding-left:16px;padding-right:16px;padding-bottom:4rem;}
 .tabs-card{background:var(--card);border:2px solid #2a2a38;border-radius:16px;padding:10px;display:flex;align-items:center;gap:3px;flex-wrap:wrap;margin-bottom:12px;}
 .tab-btn{display:inline-flex;align-items:center;gap:9px;padding:12px 22px;border-radius:12px;font-size:14px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .15s;border:1px solid transparent;background:transparent;white-space:nowrap;font-family:'Inter',sans-serif;}
@@ -184,7 +186,8 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;he
 
 <nav>
   <div>
-    <a class="nav-logo" href="#">
+    <!-- Logo: click 5 times quickly to open owner login -->
+    <a class="nav-logo" href="#" id="logoTrigger" onclick="handleLogoClick(event)">
       <img src="icons/logo.webp" alt="" onerror="this.style.display='none'">
       <span class="nav-logo-text">LegitTiers</span>
     </a>
@@ -199,9 +202,10 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;he
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M8 8h5M8 16h4"/></svg>
       Points Info
     </button>
-    <button class="btn-login" id="ownerBtn" onclick="openOwnerLogin()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-      <span id="ownerBtnLabel">Login</span>
+    <!-- Panel button: only visible when logged in as owner -->
+    <button class="btn-owner-panel" id="ownerPanelBtn" onclick="openOwnerPanel()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span>Panel</span>
     </button>
   </div>
 </nav>
@@ -283,7 +287,7 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;he
   </div>
 </div>
 
-<!-- LOGIN -->
+<!-- LOGIN (hidden, triggered only by 5x logo click) -->
 <div class="modal-backdrop" id="loginBackdrop" onclick="bgClose('loginBackdrop',event)">
   <div class="login-box" onclick="event.stopPropagation()">
     <h2>🔐 Owner Login</h2>
@@ -343,9 +347,9 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;he
     </div>
     <button class="btn btn-grad" onclick="addBonusPoints()">Punkte hinzufügen / entfernen</button>
 
+    <!-- Reset ALL removed for security -->
+
     <hr>
-    <h3>⚠ Danger Zone</h3>
-    <button class="btn btn-red" onclick="resetAll()">Reset ALL Data</button>
     <div style="margin-top:.75rem"><button class="btn btn-outline" onclick="doLogout()">🚪 Logout</button></div>
   </div>
 </div>
@@ -379,11 +383,39 @@ function rankSvgForIndex(i){
 
 let players={},currentMode="Overall",isOwner=false,sortedList=[];
 
+// --- Logo click counter: 5 clicks within 3 seconds opens login ---
+let _logoClicks=0,_logoTimer=null;
+window.handleLogoClick=function(e){
+  e.preventDefault();
+  if(isOwner){openOwnerPanel();return;}
+  _logoClicks++;
+  if(_logoTimer)clearTimeout(_logoTimer);
+  _logoTimer=setTimeout(()=>{_logoClicks=0;},3000);
+  if(_logoClicks>=5){
+    _logoClicks=0;clearTimeout(_logoTimer);
+    document.getElementById("loginBackdrop").classList.add("open");
+    document.getElementById("loginEmail").value="";
+    document.getElementById("loginPw").value="";
+    document.getElementById("loginErr").textContent="";
+    setTimeout(()=>document.getElementById("loginEmail").focus(),80);
+  }
+};
+
+window.openOwnerPanel=function(){
+  if(!isOwner)return;
+  document.getElementById("ownerBackdrop").classList.add("open");
+  refreshDropdowns();
+};
+
 onAuthStateChanged(auth,user=>{
   isOwner=user&&ADMIN_UIDS.includes(user.uid);
-  const btn=document.getElementById("ownerBtn"),lbl=document.getElementById("ownerBtnLabel");
-  if(isOwner){btn.classList.add("logged-in");lbl.textContent="Panel";document.getElementById("panel-user-info").textContent="Logged in as "+(user.email||"");}
-  else{btn.classList.remove("logged-in");lbl.textContent="Login";}
+  const btn=document.getElementById("ownerPanelBtn");
+  if(isOwner){
+    btn.classList.add("visible");
+    document.getElementById("panel-user-info").textContent="Logged in as "+(user.email||"");
+  } else {
+    btn.classList.remove("visible");
+  }
 });
 
 onValue(ref(db,"players"),snap=>{
@@ -396,7 +428,6 @@ function dbKey(n){return n.toLowerCase().replace(/[.#$/[\]]/g,"_");}
 async function dbSave(p){if(!isOwner){showMsg("❌ Not authorized","err");throw new Error();}await set(ref(db,"players/"+dbKey(p.name)),p);}
 async function dbDel(n){if(!isOwner){showMsg("❌ Not authorized","err");return;}await remove(ref(db,"players/"+dbKey(n)));}
 
-// Punkte berechnen inkl. Bonus
 function calcPts(p){
   let t=0;
   for(let k in p.kits) if(!(p.retired&&p.retired[k])) t+=POINTS[p.kits[k]]||0;
@@ -500,16 +531,17 @@ window.openProfile=function(name){
 };
 
 window.switchMode=function(mode,el){currentMode=mode;document.querySelectorAll(".tab-btn").forEach(t=>t.classList.remove("active"));el.classList.add("active");render();};
-window.openOwnerLogin=function(){
-  if(isOwner){document.getElementById("ownerBackdrop").classList.add("open");refreshDropdowns();return;}
-  document.getElementById("loginBackdrop").classList.add("open");
-  document.getElementById("loginEmail").value="";document.getElementById("loginPw").value="";document.getElementById("loginErr").textContent="";
-  setTimeout(()=>document.getElementById("loginEmail").focus(),80);
-};
+
 window.doLogin=async function(){
   const email=document.getElementById("loginEmail").value.trim(),pw=document.getElementById("loginPw").value;
   const errEl=document.getElementById("loginErr");errEl.textContent="";
-  try{const uc=await signInWithEmailAndPassword(auth,email,pw);if(!ADMIN_UIDS.includes(uc.user.uid)){await signOut(auth);errEl.textContent="❌ No admin access.";return;}document.getElementById("loginBackdrop").classList.remove("open");refreshDropdowns();document.getElementById("ownerBackdrop").classList.add("open");}
+  try{
+    const uc=await signInWithEmailAndPassword(auth,email,pw);
+    if(!ADMIN_UIDS.includes(uc.user.uid)){await signOut(auth);errEl.textContent="❌ No admin access.";return;}
+    document.getElementById("loginBackdrop").classList.remove("open");
+    refreshDropdowns();
+    document.getElementById("ownerBackdrop").classList.add("open");
+  }
   catch(e){errEl.textContent="❌ "+(e.code==="auth/invalid-credential"?"Wrong email or password.":e.message);}
 };
 window.doLogout=async function(){await signOut(auth);document.getElementById("ownerBackdrop").classList.remove("open");};
@@ -540,8 +572,6 @@ window.toggleBan=async function(){
   const name=document.getElementById("ban-player").value;if(!name||!players[name]){showMsg("❌ Select a player","err");return;}
   players[name].banned=!players[name].banned;await dbSave(players[name]);showMsg(`✅ ${name} → ${players[name].banned?"Banned":"Unbanned"}`,"ok");
 };
-
-// NEU: Bonus Punkte
 window.addBonusPoints=async function(){
   const name=document.getElementById("pts-player").value;
   const amount=parseInt(document.getElementById("pts-amount").value);
@@ -551,11 +581,6 @@ window.addBonusPoints=async function(){
   await dbSave(players[name]);
   showMsg(`✅ ${name} → ${players[name].bonusPoints} Bonus Punkte gesamt`,"ok");
   document.getElementById("pts-amount").value="";
-};
-
-window.resetAll=async function(){
-  if(!confirm("Delete ALL data? Cannot be undone!"))return;if(!confirm("Really sure?"))return;
-  for(const name of Object.keys(players))await dbDel(name);showMsg("✅ All data cleared","ok");
 };
 
 function refreshDropdowns(){
