@@ -175,6 +175,8 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;he
 .pts-row{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;border-radius:8px;background:#141420;border:1px solid var(--border);}
 .pts-tier{font-family:'Inter',sans-serif;font-weight:800;font-size:12.5px;}
 .pts-val{font-size:11px;color:var(--text2);}
+/* Reset warning box */
+.reset-warning{background:rgba(200,30,30,.07);border:2px solid rgba(200,30,30,.3);border-radius:10px;padding:12px 14px;margin-bottom:.8rem;font-size:11.5px;color:#f08080;line-height:1.5;}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:#252535;border-radius:99px;}
@@ -342,6 +344,13 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;he
       <input type="number" id="pts-amount" placeholder="z.B. 5 oder -5" style="max-width:130px">
     </div>
     <button class="btn btn-grad" onclick="addBonusPoints()">Punkte hinzufuegen / entfernen</button>
+
+    <hr>
+    <h3>⚠️ Alle Spieler reseten</h3>
+    <div class="reset-warning">
+      Achtung: Diese Aktion löscht <strong>alle Spieler</strong> unwiderruflich aus der Datenbank. Vorher ein Backup in der Firebase Console machen (Export JSON).
+    </div>
+    <button class="btn btn-red" onclick="resetAllPlayers()">ALLE SPIELER LÖSCHEN</button>
 
     <hr>
     <div style="margin-top:.75rem"><button class="btn btn-outline" onclick="doLogout()">Logout</button></div>
@@ -570,6 +579,20 @@ window.addBonusPoints=async function(){
   await dbSave(players[name]);
   showMsg(name+" -> "+players[name].bonusPoints+" Bonus Punkte gesamt","ok");
   document.getElementById("pts-amount").value="";
+};
+
+window.resetAllPlayers=async function(){
+  if(!isOwner){showMsg("Not authorized","err");return;}
+  const confirmed=confirm("⚠️ WIRKLICH alle Spieler löschen?\n\nDiese Aktion kann NICHT rückgängig gemacht werden!\nVorher unbedingt ein Backup machen.");
+  if(!confirmed)return;
+  const doubleCheck=confirm("Letzter Hinweis: ALLE Spielerdaten werden permanent gelöscht. Fortfahren?");
+  if(!doubleCheck)return;
+  try{
+    await remove(ref(db,"players"));
+    showMsg("✓ Alle Spieler wurden gelöscht.","ok");
+  }catch(e){
+    showMsg("Fehler: "+e.message,"err");
+  }
 };
 
 function refreshDropdowns(){
