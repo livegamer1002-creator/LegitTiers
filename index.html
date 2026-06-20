@@ -188,13 +188,13 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;he
   <div>
     <a class="nav-logo" href="#">
       <img src="icons/logo.webp" alt="" onerror="this.style.display='none'">
-      <span class="nav-logo-text"><span class="logo-l" id="logoL" onclick="handleLogoClick()">L</span>EGITTIERS</span>
+      <span class="nav-logo-text"><span class="logo-l" id="logoL" onclick="handleLogoClick()">M</span>XSERYTIERS</span>
     </a>
   </div>
   <div class="nav-center">
     <a class="nav-link" href="#"><img src="icons/home-muted.svg" alt=""><span>HOME</span></a>
     <a class="nav-link" href="#"><img src="icons/rankings.svg" alt=""><span>RANKINGS</span></a>
-    <a class="nav-link" href="https://discord.gg/Q7BYQDTg76" target="_blank"><img src="icons/discord.svg" alt=""><span>DISCORD</span></a>
+    <a class="nav-link" href="https://discord.gg/9HKcrBQbVJ" target="_blank"><img src="icons/discord.svg" alt=""><span>DISCORD</span></a>
   </div>
   <div class="nav-right">
     <button class="btn-points" onclick="document.getElementById('ptsBackdrop').classList.add('open')">
@@ -211,7 +211,7 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;he
 <div class="page-wrap">
   <div class="tabs-card">
     <div class="tab-btn overall-tab active" onclick="switchMode('Overall',this)"><img src="icons/overall.svg" onerror="this.style.display='none'">Overall</div>
-    <div class="tab-btn" onclick="switchMode('NetheriteOP',this)"><img src="icons/nethop.svg" onerror="this.style.display='none'">Nethpot</div>
+    <div class="tab-btn" onclick="switchMode('NetheriteOP',this)"><img src="icons/nethop.svg" onerror="this.style.display='none'">Nethop</div>
     <div class="tab-btn" onclick="switchMode('SMP',this)"><img src="icons/smp.svg" onerror="this.style.display='none'">Smp</div>
     <div class="tab-btn" onclick="switchMode('UHC',this)"><img src="icons/uhc.svg" onerror="this.style.display='none'">Uhc</div>
     <div class="tab-btn" onclick="switchMode('Sword',this)"><img src="icons/sword.svg" onerror="this.style.display='none'">Sword</div>
@@ -285,7 +285,7 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:10000;he
   </div>
 </div>
 
-<!-- LOGIN (hidden - triggered only by 5x click on the "L" in LEGITTIERS) -->
+<!-- LOGIN (hidden - triggered only by 5x click on the "M" in MXSERYTIERS) -->
 <div class="modal-backdrop" id="loginBackdrop" onclick="bgClose('loginBackdrop',event)">
   <div class="login-box" onclick="event.stopPropagation()">
     <h2>Owner Login</h2>
@@ -386,7 +386,7 @@ function rankSvgForIndex(i){
 
 let players={},currentMode="Overall",isOwner=false,sortedList=[];
 
-// 5 clicks on the "L" within 3 seconds opens login
+// 5 clicks on the "M" within 3 seconds opens login
 let _logoClicks=0,_logoTimer=null;
 window.handleLogoClick=function(){
   if(isOwner){openOwnerPanel();return;}
